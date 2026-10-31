@@ -1,0 +1,15 @@
+# Python dependencies for the figure scripts (12_main_figures, 13_supplementary_figures and figlib).
+# Versions are pinned exactly to the environment the figures were generated in (Python 3.13.11), so that a fresh
+# install redraws them file for file. Font: Arial; on a machine without Arial, install Liberation Sans (same glyph
+# widths), which figlib registers under the name Arial.
+
+matplotlib==3.10.8
+numpy==2.4.2
+pandas==2.3.3
+scipy==1.17.1
+scikit-learn==1.8.0
+statsmodels==0.14.6
+lifelines==0.30.3
+PyMuPDF==1.27.2
+Pillow==12.2.0
+scikit-image==0.26.0

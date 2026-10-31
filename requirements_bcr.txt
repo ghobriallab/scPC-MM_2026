@@ -1,0 +1,12 @@
+# Python 3.8 environment of the dandelion steps of 03_malignant_cells (02_dandelion_clonotypes.py,
+# 03_cohort_bcr_tables.py, 04_isotype_immunofixation.py). 01_dandelion_preprocess.sh runs in the sc-dandelion container.
+
+dandelion==0.3.3
+pandas==2.0.3
+numpy==1.24.4
+scipy==1.10.1
+matplotlib==3.6.3
+networkx==3.1
+changeo
+scanpy
+rpy2
