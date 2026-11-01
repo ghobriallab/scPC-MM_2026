@@ -4,13 +4,15 @@ mutation-based and transcription-based progression scores.
 
 Purpose:      A, B, Cox models of progression-free and overall survival (MST score adjusted for age, sex, R2-ISS and
               IMS/IMWG 2025 risk), exact Wald P. C, MST score against the WGS MM-like score with the least-squares fit
-              (points jittered horizontally), residuals by disease stage, and the classifier features whose Spearman
+              (points jittered horizontally), residuals by disease stage (Spearman correlation with stage coded 0-4, from
+              03_wgs_residuals_by_stage.py), and the classifier features whose Spearman
               correlation with the residuals has q < 0.05 (Benjamini-Hochberg). D, the same for the LASSO model of the
               MST score on 27 genomic alterations: observed against predicted scores (dashed line, predicted =
               observed), residuals and correlated features.
 
 Inputs:       results/commpass: mst_cox_coefficients.tsv, mst_cox_covariates.tsv, mst_cox_models.tsv;
-              results/figure_inputs: wgs_samples.tsv, wgs_residual_features_lm.tsv, wgs_residual_features_lasso.tsv.
+              results/figure_inputs: wgs_samples.tsv, wgs_residual_features_lm.tsv, wgs_residual_features_lasso.tsv,
+              wgs_residual_stage.tsv.
 
 Outputs:      figures/SuppFig15.svg, SuppFig15.pdf; figures/source_data/SuppFig15_*.tsv.
 
@@ -32,7 +34,7 @@ import palettes as P
 import paths
 import plots
 from checks import figure_checks, file_checks, report
-from figstyle import style, rich_text, p_runs, n_runs, rng, MINUS, SMALL, BASE
+from figstyle import style, rich_text, p_runs, rho_runs, join_runs, n_runs, rng, MINUS, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 from plots import at_mm
 
@@ -135,7 +137,7 @@ def feature_color(f):
     base = f.split(":")[-1]
     return P.SIGNATURE.get(base, "#808080")
 
-def regression_row(sf, w, feats, kind):
+def regression_row(sf, w, feats, kind, stage_stat):
     lm = kind == "lm"
     x = w["wgs_mm_like_score"].values.astype(float) if lm else w["lasso_pred"].values
     resid = w["lm_resid"].values if lm else w["lasso_resid"].values
@@ -175,6 +177,8 @@ def regression_row(sf, w, feats, kind):
               ms=3.2, line=True, ls=(0, (3, 2)), gid="pn-lkey")
     # residuals by disease stage
     at_mm(sf, 95.0, 1.8, "Residuals by disease stage", "pn-rtitle", ha="center")
+    rho, p = stage_stat                                         # Spearman correlation with disease stage (0-4)
+    at_mm(sf, 95.0, 4.6, join_runs([("Spearman ", "")] + rho_runs(rho), p_runs(p)), "pn-rstat", size=SMALL, ha="center")
     ar = axes_mm(sf, 83.0, 7.0, 25.0, 24.0)
     d = pd.DataFrame({"group": w["disease_status"].values, "value": resid})
     plots.box_strip(ar, d, STAGES, P.TUMOR, "sf15r" + kind, point=1.5, width=0.62, labels=STAGES, label_size=SMALL,
@@ -215,12 +219,14 @@ def main():
     # expected values
     assert abs(lm.set_index("feature").loc["auc:circulatory_capacity", "rho"] - (-0.528946)) < 1e-6
     assert abs(la.set_index("feature").loc["auc:circulatory_capacity", "rho"] - (-0.500294)) < 1e-6
+    st = pd.read_csv(paths.cache("wgs_residual_stage.tsv"), sep="\t").set_index("residual")
+    assert abs(st.loc["lm_resid", "rho"] - 0.608735) < 1e-5 and abs(st.loc["lasso_resid", "rho"] - 0.589916) < 1e-5
     with style():
         fig, pn = new_figure(LAYOUT)
         panel_cox(pn["cox_pfs"], "IA22 PFS", "Progression-free survival", (0.45, 7.5), [0.5, 1, 2, 5])
         panel_cox(pn["cox_os"], "IA22 OS", "Overall survival", (0.4, 11.0), [0.5, 1, 2, 5, 10])
-        f1 = regression_row(pn["wgs_regression"], w, lm, "lm")
-        f2 = regression_row(pn["lasso_regression"], w, la, "lasso")
+        f1 = regression_row(pn["wgs_regression"], w, lm, "lm", st.loc["lm_resid", ["rho", "p"]].tolist())
+        f2 = regression_row(pn["lasso_regression"], w, la, "lasso", st.loc["lasso_resid", ["rho", "p"]].tolist())
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
@@ -228,6 +234,7 @@ def main():
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
     source("CD_samples", w[["patient_id", "disease_status", "wgs_mm_like_score", "mst", "lm_fitted", "lm_resid", "lasso_pred",
                             "lasso_resid"]])
+    source("CD_residuals_by_stage", st.reset_index())
     source("CD_features", pd.concat([f1.assign(model="linear (WGS MM-like score)"), f2.assign(model="LASSO (27 mutations)")]))
 
 
