@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 3: processing batches and the PC UMAP, and paired BM and PB samples.
+"""Supplementary Figure 3: batch structure of the PC UMAP, and paired BM and PB samples.
 
 Purpose:      A, origin of the 30 nearest neighbors of each PC in the graph of the Fig. 1C UMAP, mean over individuals.
               B, per-patient UMAPs of three same-visit BM and PB pairs (at most 800 cells per tissue and PC status
@@ -30,7 +30,7 @@ LAYOUT = FigureLayout("SuppFig3", [Slot("neighbors", "A", 0, 0, 44, 60), Slot("p
                       max_height=247)
 PT_MM = 25.4 / 72.0
 COMP = [("same_sample", "Same sample", "#4D4D4D"), ("same_individual_other_sample", "Same individual, other sample", "#A6A6A6"),
-        ("other_individual_same_day", "Other individuals, same processing day", "#E69F00"),
+        ("other_individual_same_day", "Other individuals, same sampling day", "#E69F00"),
         ("other_individual_other_day", "Other individuals, other days", "#B5DDF5")]
 GROUPS = [("BM", "malignant"), ("PB", "malignant"), ("BM", "normal"), ("PB", "normal")]
 

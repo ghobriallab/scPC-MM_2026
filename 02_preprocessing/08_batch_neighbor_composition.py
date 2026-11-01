@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Origin of the 30 nearest neighbors of each PC in the graph of the Fig. 1C UMAP, processing-day and tissue mixing
+"""Origin of the 30 nearest neighbors of each PC in the graph of the Fig. 1C UMAP, same-day and tissue mixing
 tests, and per-patient UMAPs of same-visit BM and PB samples (Results; Methods, scRNA-seq data normalization and
 clustering; Supplementary Fig. 3).
 
-Purpose:      Asks whether the structure of the Fig. 1C UMAP follows processing batches, using the graph of that UMAP
-              (each cell and its 30 nearest neighbors in PCA space). Samples were processed within 6 hours of
-              collection, so the collection date is the processing day. Tests are observed / expected neighbors
+Purpose:      Asks whether the structure of the Fig. 1C UMAP follows batches, using the graph of that UMAP
+              (each cell and its 30 nearest neighbors in PCA space). Samples collected on the same day are treated
+              as one batch (batch label = collection date). Tests are observed / expected neighbors
               (1 = cells mix as if the factor did not matter).
               1. Percentage of a cell's neighbors from the same individual (individuals with >= 30 cells of the type).
-              2a. Neighbors from other individuals with the same cell type and tissue: share processed on the same day
+              2a. Neighbors from other individuals with the same cell type and tissue: share sampled on the same day
                   against the share expected by chance (95% CI from 1,000 bootstrap resamples of individuals,
                   default_rng(42)); composition of each cell's neighbors (same sample, same individual's other samples,
                   other individuals on the same day or on other days), averaged per individual.
@@ -125,7 +125,7 @@ def mixing(cells, pool, other):
     return obs_share.mean(), exp_share.mean(), int(keep.sum())
 
 
-# a. processing day: among a cell's neighbors from OTHER individuals with the same cell type and tissue, the share processed on
+# a. same day: among a cell's neighbors from OTHER individuals with the same cell type and tissue, the share sampled on
 #    the same day, against the share expected if neighbors were drawn at random from those cells
 ct = np.where(mal, "malignant", "normal")
 tis = obs["sample_type"].values
@@ -174,7 +174,7 @@ C = C[comp.groupby(["patient", "cell_type"]).size() >= MIN_CELLS].reset_index()
 C.to_csv(OUT / "batch_neighbor_composition.tsv", sep="\t", index=False)
 log("  neighbor composition (%% of the 30 neighbors; median over individuals):")
 log(C.groupby("cell_type").median(numeric_only=True).round(1).to_string())
-# b. malignant BM PCs of one patient across visits (different processing days)
+# b. malignant BM PCs of one patient across visits (different sampling days)
 bm = (obs["sample_type"] == "BM").values
 for p in np.unique(pat[mal & bm]):
     m = mal & bm & (pat == p)

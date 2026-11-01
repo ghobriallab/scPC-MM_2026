@@ -4,7 +4,7 @@
 |--------|--------|---------|
 | S1 | `01_SuppFig1.py` | Cohort structure and malignant PCs across the cohort |
 | S2 | `02_SuppFig2.py` | Malignant PCs without detectable CNV |
-| S3 | `03_SuppFig3.py` | Processing batches and the PC UMAP; paired BM and PB samples |
+| S3 | `03_SuppFig3.py` | Batch structure of the PC UMAP; paired BM and PB samples |
 | S4 | `04_SuppFig4.py` | Cytogenetic classification at the single-cell level |
 | S5 | `05_SuppFig5.py` | Sixteen therapeutic targets on the UMAP of Fig. 1C |
 | S6 | `06_SuppFig6.py` | Genes stably up- or downregulated in malignant PCs across disease stages |
