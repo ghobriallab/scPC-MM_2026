@@ -85,8 +85,7 @@ def panel_smm_progression(sf):
         tops = plots.box_strip(ax, d.assign(value=d[col]), SMM, P.TUMOR, "fig5-smm-" + col, jitter_col="jit",
                                highlight="progressed", n_labels="below" if col == "pct" else None)
         if col == "mst":
-            plots.refline(ax, 0.5)
-            ax.set_xticklabels([])
+            plots.refline(ax, 0.5)                      # risk-group labels under both rows; n under the bottom row
         ax.set_ylim(*ylim)
         plots.brackets(ax, [dict(i=0, j=2, color=P.BRACKET_STAGE,
                                  runs=join_runs([("Spearman\u2019s ", "")] + rho_runs(S[pre + "spearman_rho_risk_group"]),

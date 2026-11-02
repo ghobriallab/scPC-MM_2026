@@ -76,12 +76,12 @@ def panel_flow(sf):
     risk = [int(st.loc[s, "individuals"]) for s in ("LRSMM", "IRSMM", "HRSMM")]
     assert sum(risk) == int(smm["individuals"]) + int(fl["SMM_at_two_risk_levels"])
 
-    def fbox(x, y, w, h, lines, key, edge="#4D4D4D", lw=0.5, size=BASE, first=TITLE):
-        """A rounded box with centered lines: the first bold at `first` pt, the others at `size` pt."""
+    def fbox(x, y, w, h, lines, key, edge="#4D4D4D", lw=0.5, size=BASE, first=TITLE, sizes=None):
+        """A rounded box with centered lines: the first bold at `first` pt, the others at `size` pt (or `sizes`, per line)."""
         p = icons.FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=1.0", fc="white", ec=edge, lw=lw, zorder=0)
         p.set_gid("bg-box-" + key)
         ax.add_patch(p)
-        sizes = [first] + [size] * (len(lines) - 1)
+        sizes = sizes or [first] + [size] * (len(lines) - 1)
         lh = [s * 1.25 * PT_MM for s in sizes]
         yy = y + (h - sum(lh)) / 2
         assert sum(lh) <= h - 1.0, (key, sum(lh), h)
@@ -101,12 +101,13 @@ def panel_flow(sf):
     w4 = (W - 3 * gap) / 4
     xs4 = [X0 + i * (w4 + gap) for i in range(4)]
     icons.label(ax, X0, 16.3, [("Disease stage at sampling (individuals)", "b")], "l1", ha="left", width=W)
-    stage_boxes = [("Donor", ["Healthy donors %d" % stage_n[0]]), ("MGUS", ["MGUS %d" % stage_n[1]]),
-                   ("IRSMM", ["SMM %d" % stage_n[2], "LR %d, IR %d, HR %d" % tuple(risk),
-                              "(%d at two risk levels)" % int(fl["SMM_at_two_risk_levels"])]),
-                   ("MM", ["MM %d" % stage_n[3]])]
+    # stage name, then the number of individuals on its own line, as in the sampling-design boxes below
+    stage_boxes = [("Donor", ["Healthy donors", "%d" % stage_n[0]]), ("MGUS", ["MGUS", "%d" % stage_n[1]]),
+                   ("IRSMM", ["SMM", "%d" % stage_n[2], "LR %d, IR %d, HR %d (%d at two risk levels)"
+                              % (tuple(risk) + (int(fl["SMM_at_two_risk_levels"]),))]),
+                   ("MM", ["MM", "%d" % stage_n[3]])]
     for x, (col, lines) in zip(xs4, stage_boxes):
-        fbox(x, 18.4, w4, 9.6, lines, "st" + col, edge=P.STAGE[col], lw=1.0)
+        fbox(x, 18.4, w4, 9.6, lines, "st" + col, edge=P.STAGE[col], lw=1.0, sizes=[BASE, TITLE, 5.5][:len(lines)])
     icons.label(ax, X0, 30.1, [("Sampling design (individuals)", "b")], "l2", ha="left", width=W)
     for i, (x, t) in enumerate(zip(xs4, ["One BM sample", "BM + PB, one visit", "PB only", "Two or three visits"])):
         fbox(x, 32.2, w4, 7.2, [t, "%d" % design[i]], "ds%d" % i, size=TITLE, first=BASE)
