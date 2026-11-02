@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Individuals, samples and PCs by disease stage and tissue, sampling designs and the individuals or tumors kept by each
-analysis (Extended Data Fig. 1A; Supplementary Table 1; Methods, Cohort structure and repeat samples).
+analysis (Extended Data Fig. 1A; Supplementary Table 2; Methods, Cohort structure and repeat samples).
 
 Purpose:      Counts individuals, samples and plasma cells (PCs) passing QC by disease stage and tissue (an individual
               sampled at two stages is counted at both), classifies the sampling design of each individual (one BM
@@ -272,7 +272,7 @@ flow = pd.DataFrame(flow)
 flow.to_csv(OUT / "analysis_flow.tsv", sep="\t", index=False)
 log("\nanalysis flow (Extended Data Fig. 1A):\n" + flow.to_string(index=False))
 
-# ---- Supplementary Table 1, cohort sheets -----------------------------------------------------------
+# ---- Supplementary Table 2, cohort sheet -----------------------------------------------------------
 nice = {"stage": "Disease stage at sampling", "individuals": "Individuals", "individuals_with_BM": "Individuals with BM",
         "individuals_with_PB": "Individuals with PB", "individuals_with_BM_and_PB": "Individuals with BM and PB",
         "samples": "Samples", "BM_samples": "BM samples", "PB_samples": "PB samples",

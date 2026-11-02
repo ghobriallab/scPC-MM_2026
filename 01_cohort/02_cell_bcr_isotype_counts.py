@@ -10,7 +10,7 @@ Purpose:      From the cell table (one row per PC passing QC): PCs per individua
               Immunofixation concordance: for each patient with serum immunofixation and malignant PCs covered by
               scBCR-seq (BM and PB; oligosecretory results excluded), the majority light chain must be among the light
               chains of the immunofixation result, and the majority heavy-chain class (when called) among its heavy
-              chains. Healthy-donor samples by source. Patients with FISH and with WGS results (Supplementary Table 2).
+              chains. Healthy-donor samples by source. Patients with FISH and with WGS results (Supplementary Table 4).
               Cells used for signature detection: at most 1,000 malignant and 1,000 normal PCs per individual and
               tissue.
 
@@ -20,7 +20,7 @@ Inputs:       data/h5/agg/plasma-cell-GEX5-annotation-250207.pkl (cell table): r
               tissue_id, NBM_Source.
               data/paper/cohort-clinical-metadata.csv (publication table): patient_id, IFX (immunofixation result,
               components separated by '.', e.g. IgG_Kappa.FF_Kappa).
-              data/paper/cytogenetics-status.csv (Supplementary Table 2): patient_id, FISH, WGS.
+              data/paper/cytogenetics-status.csv (Supplementary Table 4): patient_id, FISH, WGS.
 
 Outputs:      results/cohort/cell_bcr_isotype_counts.tsv: quantity, value, definition.
               results/cohort/cell_bcr_isotype_counts_log.txt: the same counts as printed.
@@ -137,9 +137,9 @@ for (source, tissue), k in don.groupby(["NBM_Source", "sample_type"]).size().ite
 
 # ---- 6. cytogenetic assays ------------------------------------------------------------------------------
 report("patients with FISH results", cy.loc[cy["FISH"].notna() & (cy["FISH"] != "Unavailable"), "patient_id"].nunique(),
-       "Supplementary Table 2, FISH not 'Unavailable'")
+       "Supplementary Table 4, FISH not 'Unavailable'")
 report("patients with WGS", cy.loc[cy["WGS"].notna() & (cy["WGS"] != "Unavailable"), "patient_id"].nunique(),
-       "Supplementary Table 2, WGS not 'Unavailable'")
+       "Supplementary Table 4, WGS not 'Unavailable'")
 
 # ---- 7. cells used for signature detection ------------------------------------------------------------------
 capped = cells.groupby(["patient_id", "sample_type", "annotation"]).size().clip(upper=1000)

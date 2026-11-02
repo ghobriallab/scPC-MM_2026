@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Age, sex and self-reported race by disease stage, their comparisons between stages, and stage associations adjusted
-for race (Supplementary Table 1; Methods).
+for race (Supplementary Table 3; Methods).
 
 Purpose:      Each individual with PCs passing quality control is counted once, in the stage group of their samples
               (healthy donor, MGUS, SMM or MM; the samples of each individual fall in one of these groups). SMM risk

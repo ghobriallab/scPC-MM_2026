@@ -12,7 +12,7 @@ Purpose:      Counts tumors with GPRC5D up- or downregulated in malignant versus
 
 Inputs:       results/differential_expression/BM_scRNA_tumor_DE_FDR.csv, BM_scRNA_tumor_DE_logFoldChange.csv: rows = genes, columns
               = <patient>_BM_<stage>_tumor_<clone> (clone 0 = main clone), within-patient malignant vs normal PCs.
-              data/paper/cytogenetics-status.csv (Supplementary Table 2): patient_id, cytogenetics (one call per patient).
+              data/paper/cytogenetics-status.csv (Supplementary Table 4): patient_id, cytogenetics (one call per patient).
 
 Outputs:      results/differential_expression/gprc5d_counts.tsv: group, tumors, patients, up, down, unchanged, % up.
               results/differential_expression/gprc5d_tests.tsv: Fisher's exact test t(11;14) vs other tumors; binomial
@@ -48,7 +48,7 @@ t = pd.DataFrame({"patient": [c.split("_")[0] for c in main], "stage": [c.split(
 t["up"] = (fdr.loc["GPRC5D", main] < 0.01) & (lfc.loc["GPRC5D", main] > 1)
 t["down"] = (fdr.loc["GPRC5D", main] < 0.01) & (lfc.loc["GPRC5D", main] < -1)
 
-# one cytogenetic call per patient (Supplementary Table 2)
+# one cytogenetic call per patient (Supplementary Table 4)
 cy = pd.read_csv(data("paper", "cytogenetics-status.csv"))
 t["t1114"] = t["patient"].map(cy.drop_duplicates("patient_id").set_index("patient_id")["cytogenetics"]) == "t(11;14)"
 log("tumors (main clone, patient x stage): %d from %d patients" % (len(t), t.patient.nunique()))
