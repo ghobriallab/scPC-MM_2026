@@ -88,6 +88,9 @@ def unique_gids(fig):
             seen[g] = 0
 
 
+AUTHOR = "No\u00e9 Perron"                                            # figure author (SVG and PDF metadata)
+
+
 def save(fig, lay, stem=None, out_dir=None, preview_dpi=150):
     """Write <stem>.svg and <stem>.pdf (figures/), a PNG preview and the slot geometry (figures/previews, figures/checks)."""
     stem = stem or lay.name
@@ -97,7 +100,9 @@ def save(fig, lay, stem=None, out_dir=None, preview_dpi=150):
     os.environ.setdefault("SOURCE_DATE_EPOCH", "0")
     svg = os.path.join(out_dir, stem + ".svg")
     pdf = os.path.join(out_dir, stem + ".pdf")
-    for path, fmt, meta in ((svg, "svg", {"Date": None}), (pdf, "pdf", {"CreationDate": None, "ModDate": None})):
+    meta_svg = {"Date": None, "Creator": AUTHOR}                         # author in the file metadata; no dates
+    meta_pdf = {"CreationDate": None, "ModDate": None, "Author": AUTHOR}
+    for path, fmt, meta in ((svg, "svg", meta_svg), (pdf, "pdf", meta_pdf)):
         # written to a temporary file, then moved into place (no leading dot: some synced folders hide dot-files)
         tmp = os.path.join(out_dir, "%s.tmp.%s" % (stem, fmt))
         fig.savefig(tmp, format=fmt, dpi=DPI, metadata=meta)

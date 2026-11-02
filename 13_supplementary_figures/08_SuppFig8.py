@@ -34,7 +34,7 @@ import plots
 import stage_tests as ST
 from checks import figure_checks, file_checks, report
 from figstyle import style, rich_text, SMALL, BASE, LW
-from layout import FigureLayout, Slot, new_figure, axes_mm, save
+from layout import FigureLayout, Slot, new_figure, axes_mm, save, AUTHOR
 
 ROW_H = 30.0
 LETTERS = "ABCDEFGHIJKLMNOP"
@@ -150,7 +150,7 @@ def main():
     for p in pdfs:
         with fitz.open(p) as d:
             out.insert_pdf(d)
-    out.set_metadata({})
+    out.set_metadata({"author": AUTHOR})                                  # same author as the one-page figures
     target = os.path.join(paths.FIGURES, "SuppFig8.pdf")
     out.save(target, garbage=3, deflate=True, no_new_id=True)
     out.close()
