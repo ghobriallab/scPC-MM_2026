@@ -16,6 +16,8 @@ Stage associations of the signatures and scores, progression in smoldering myelo
 | `10_histone_dna_content.py` | Histone/chaperone signature activity and tumor ploidy from whole-genome sequencing: ploidy by disease stage, its correlation with the signature, and the stage association adjusted for ploidy or HRD (Supplementary Fig. 16B-D; Results). |
 | `11_mm_like_cells_out_of_sample.py` | MM-like cells in every BM tumor scored out of sample: percentage by disease stage, across the Numbat CNV clones of each tumor, and in MGUS tumors (Fig. 6; Results). |
 | `12_gprc5d_t1114_1q_gain.py` | GPRC5D upregulation in t(11;14) versus other tumors adjusted for 1q gain (Results). |
+| `13_signature_smm_progression.py` | Activity of each of the 16 signatures in SMM patients who later progressed to MM versus those who did not (Results; Methods). |
+| `14_smm_progression_followup.py` | Progression analyses of the MST score and of MM-like cells restricted to non-progressors with at least 3 or 4 years of follow-up (Results; Methods). |
 
 Inputs are the processed data (controlled access, dbGaP phs003855; see the root README for the `data/` layout) and the tables written by earlier steps in `results/`. Each script lists its inputs and outputs in its header.
 
@@ -34,4 +36,6 @@ python3 09_stage_and_progression/09_mm_like_cells_statistics.py
 python3 09_stage_and_progression/10_histone_dna_content.py
 python3 09_stage_and_progression/11_mm_like_cells_out_of_sample.py
 python3 09_stage_and_progression/12_gprc5d_t1114_1q_gain.py
+python3 09_stage_and_progression/13_signature_smm_progression.py
+python3 09_stage_and_progression/14_smm_progression_followup.py
 ```
