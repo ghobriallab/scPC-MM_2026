@@ -101,6 +101,7 @@ data/
 │                per-individual objects (pat/), public datasets (external/<study>/)
 ├── vdj/         BCR contigs and clonotypes, isotypes
 ├── amp1q/       dandelion objects (bcr/), Numbat outputs (cnv/)
+├── cytogenetics/ per-cell inputs of the translocation classifier, FISH and WGS calls, Numbat HRD calls
 ├── cnv/         CNV segments, clones and drivers, cell-level and cytoband CNV calls, Numbat input table
 ├── pseudobulk/  pseudobulk matrices and DESeq2 results
 ├── scrna_de/    within-patient differential expression of malignant and normal PCs

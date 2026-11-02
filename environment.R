@@ -9,7 +9,7 @@
 #               automatically if missing.
 # ============================================================================
 
-CRAN <- c(survival = "3.5-8", numbat = "1.1.0")
+CRAN <- c(survival = "3.5-8", numbat = "1.1.0", nnet = "7.3-20")
 CRAN_ANY <- c("argparse", "plyr", "Seurat", "tidygraph", "shazam")
 BIOC_VERSION <- "3.14"
 BIOC <- c("DESeq2", "BiocParallel", "scuttle", "scran", "scater", "bluster", "scDblFinder", "scds")

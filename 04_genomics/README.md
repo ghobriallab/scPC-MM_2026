@@ -18,8 +18,12 @@ Copy number variants inferred from scRNA-seq, clones and cytogenetic classificat
 | `12_genome_cytoband_bins.py` | Genome-wide CNV maps of the CNV clones on 5-kb genome bins and on cytobands (Methods, Copy number variant detection). |
 | `13_cnv_gene_expression_scores.py` | Copy-number-like expression scores of the driver arms 1p, 1q, 13q, 14q and 17p in every cell, used as classifier features, and the expression of the translocation partner genes (Methods, Development of malignancy and MST scores). |
 | `14_cnv_negative_cells.py` | Malignant PCs without detectable CNV: tumors without any CNV by cytogenetic group, stage and cell number, CNV-negative cells within tumors with CNVs and their kNN neighborhoods, and CNV clones by stage (Results; Methods, Copy number variant detection; Extended Data Figs. 1C and 2). |
-| `15_two_clone_tumors_and_classifier_cv.py` | Patients with two malignant PC populations (BCR, constant genes, partner genes) and leave-one-patient-out performance of the translocation classifier (Results; Methods, Classification of cytogenetic alterations). |
-| `16_cytogenetic_call_robustness.py` | Robustness of the scRNA-seq cytogenetic calls: population sizes, partner-gene detection, accuracy with few malignant PCs, calls on healthy-donor PCs and HRD calls against FISH and WGS (Methods, Classification of cytogenetic alterations). |
+| `15_two_clone_tumors.py` | Patients with two malignant PC populations: BCR, constant genes and partner genes (Results; Methods, Classification of cytogenetic alterations). |
+| `16_cytogenetic_call_robustness.py` | Scale and support of the scRNA-seq cytogenetic calls: population sizes, partner-gene detection and HRD calls against FISH and WGS (Methods, Classification of cytogenetic alterations). |
+| `17_translocation_classifier.R` | Translocation classifier: multinomial logistic regression fitted leaving out one tumor at a time, final model as the median of the coefficients, calls per population and tissue, then the reviewed calls by patient (Methods, Classification of cytogenetic alterations). |
+| `18_translocation_classifier_accuracy.py` | Accuracy of the classifier: leave-one-out sensitivity and specificity, accuracy with few malignant PCs, calls on the normal PCs of donors and patients by tissue, PB and BM agreement, reviewed calls (Results; Methods, Classification of cytogenetic alterations; Extended Data Fig. 4). |
+
+`translocation_classifier_coefficients.tsv` holds the coefficients of the final model (one row per translocation class, HRD as reference; columns: intercept and the 14 features). `Rscript 17_translocation_classifier.R --score-only` applies them without refitting.
 
 Inputs are the processed data (controlled access, dbGaP phs003855; see the root README for the `data/` layout) and the tables written by earlier steps in `results/`. Each script lists its inputs and outputs in its header.
 
@@ -40,6 +44,8 @@ python3 04_genomics/11_clone_phylogeny.py
 python3 04_genomics/12_genome_cytoband_bins.py
 python3 04_genomics/13_cnv_gene_expression_scores.py
 python3 04_genomics/14_cnv_negative_cells.py
-python3 04_genomics/15_two_clone_tumors_and_classifier_cv.py
+python3 04_genomics/15_two_clone_tumors.py
 python3 04_genomics/16_cytogenetic_call_robustness.py
+(cd 04_genomics && Rscript 17_translocation_classifier.R)
+python3 04_genomics/18_translocation_classifier_accuracy.py
 ```
