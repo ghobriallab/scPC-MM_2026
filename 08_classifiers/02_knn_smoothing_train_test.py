@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """kNN smoothing of the per-cell classifier features of the training and test sets, for k = 10 to 100 neighbors
-(Methods, classifier development; Supplementary Fig. 12C).
+(Methods, classifier development; Extended Data Fig. 6C).
 
 Purpose:      Adds the NF-kB index and RAS signature scores (mean expression and AUCell) to the training and test tables,
               then, for each k, replaces every feature of a cell by the mean, over the cell and its k nearest neighbors,

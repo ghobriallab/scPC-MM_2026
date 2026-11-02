@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Circulatory capacity signature in CoMMpass and in paired PB and BM samples (Results; Supplementary Fig. 9B-D; Methods).
+"""Circulatory capacity signature in CoMMpass and in paired PB and BM samples (Results; Supplementary Fig. 5B-D; Methods).
 
 Purpose:      1. CoMMpass, bulk RNA-seq of CD138-selected BM cells (754 baseline samples): activity of the signature (mean
               TPM of its 39 genes) against the percentage of PCs in blood measured by flow cytometry at the visit of the
@@ -76,7 +76,7 @@ def partial_spearman(x, y, z):
     return rho, 2 * ss.t.sf(abs(t), len(r) - 3)
 
 
-# ---- 1. CoMMpass: BM signature activity vs circulating PCs (Supplementary Fig. 9B) -------------------------------
+# ---- 1. CoMMpass: BM signature activity vs circulating PCs (Supplementary Fig. 5B) -------------------------------
 cp = pd.read_csv(data("commpass", "MMRF_CoMMpass_IA22_BM_1_expr_sig_score.tsv"), sep="\t", index_col=0)
 q33, q66 = cp[SIG].quantile(q=(0.33, 0.66))                      # tertile cutoffs over all 754 patients
 cp["tertile"] = np.where(cp[SIG] > q66, "High", np.where(cp[SIG] > q33, "Medium", "Low"))
@@ -126,7 +126,7 @@ r, pr = partial_spearman(b[SIG], b["pb_pct"], b["bm_pct"])
 test("CoMMpass", "signature vs % PCs in blood, adjusted for % PCs in BM", len(b), "partial Spearman rho", r, pr)
 log("partial Spearman, adjusted for BM PCs: rho = %.2f, P = %.2g, n = %d" % (r, pr, len(b)))
 
-# ---- 2. CoMMpass: CD138+ blood vs BM samples of the same visit (Supplementary Fig. 9C) ------------------------------
+# ---- 2. CoMMpass: CD138+ blood vs BM samples of the same visit (Supplementary Fig. 5C) ------------------------------
 genes = pd.read_csv(data("signature", "hotspot", "consensus-modules_genes.csv"), index_col=0)
 genes = list(genes.index[genes["context"] == "circulatory_capacity"])
 tpm = pd.read_csv(data("commpass", "raw_data", "MMRF_CoMMpass_IA22_salmon_geneUnstranded_tpm.scRNA_compatible.tsv"),
@@ -155,7 +155,7 @@ pc_markers = ["SDC1", "TNFRSF17", "MZB1", "JCHAIN", "SLAMF7", "XBP1", "PRDM1"]  
 pc_ratio = (tpm.loc[pc_markers, pb_bm.PB].mean().values / tpm.loc[pc_markers, pb_bm.BM].mean().values)
 log("PC marker expression PB/BM: median %.2f (range %.2f-%.2f)" % (np.median(pc_ratio), pc_ratio.min(), pc_ratio.max()))
 
-# ---- 3. This cohort: PB vs BM PCs of the same individual and stage (Supplementary Fig. 9D) ----------------------------
+# ---- 3. This cohort: PB vs BM PCs of the same individual and stage (Supplementary Fig. 5D) ----------------------------
 u = pd.read_pickle(data("paper", "signatures", "per-sample-mean-expr-score.pkl"))
 u["patient_id"] = u["patient_id"].astype(str)
 for c_ in ("sample_type", "annotation", "disease_status"):

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Genes consistently upregulated in malignant PCs at every disease stage, and their upregulation in NSD2 [t(4;14)] versus
-other tumors (Results; Methods, Differential expression analysis, single-cell level; Supplementary Fig. 6).
+other tumors (Results; Methods, Differential expression analysis, single-cell level; Supplementary Fig. 2).
 
 Purpose:      1. Genes upregulated in malignant versus normal PCs of the same patient (q < 0.01 and log2 fold change > 1,
                  the rule of Fig. 2A; main clone, BM) in at least half of the tumors at every disease stage. No gene is

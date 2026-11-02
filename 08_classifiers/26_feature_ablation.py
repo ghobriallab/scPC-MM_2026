@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Feature ablation of the malignancy and MGUS-MM random forest classifiers (Supplementary Fig. 12E; Results and Methods).
+"""Feature ablation of the malignancy and MGUS-MM random forest classifiers (Extended Data Fig. 6E; Results and Methods).
 
 Purpose:      Both tiers are refit with their tuned parameters (seed 42) on the training patients, with the full model
               refit in the same run as the baseline. MGUS-MM tier (the MST score; 21 features = AUCell scores of the 16

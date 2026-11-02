@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 8: summary of the sixteen transcriptional signatures (two pages: A-H, I-P).
+"""Supplementary Figures 3 and 4: summary of the sixteen transcriptional signatures (eight signatures per figure, panels A-H).
 
 Purpose:      One row per signature: (1) UMAP of single-cell signature activity on the embedding of Fig. 1C (viridis,
               highest values drawn last, cells without a score in light gray); (2) the 15 genes with the highest Hotspot
@@ -10,7 +10,7 @@ Purpose:      One row per signature: (1) UMAP of single-cell signature activity 
 Inputs:       results/figure_inputs: pcs_cells.npz, pcs_signatures.npz, hotspot_genes.tsv,
               per-sample-mean-expr-score.csv.gz; results/stage_and_progression/stage_comparisons.tsv.
 
-Outputs:      figures/SuppFig8_p1.svg, SuppFig8_p2.svg, SuppFig8.pdf (two pages); figures/source_data/SuppFig8_*.tsv.
+Outputs:      figures/SuppFig3.svg, SuppFig3.pdf, SuppFig4.svg, SuppFig4.pdf; figures/source_data/SuppFig3_4_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -21,7 +21,6 @@ sys.path[:0] = [os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "
                 os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")]      # figlib modules, config.py
 import os
 
-import fitz
 import matplotlib.cm as mcm
 import numpy as np
 import pandas as pd
@@ -34,20 +33,20 @@ import plots
 import stage_tests as ST
 from checks import figure_checks, file_checks, report
 from figstyle import style, rich_text, SMALL, BASE, LW
-from layout import FigureLayout, Slot, new_figure, axes_mm, save, AUTHOR
+from layout import FigureLayout, Slot, new_figure, axes_mm, save
 
-ROW_H = 30.0
-LETTERS = "ABCDEFGHIJKLMNOP"
+ROW_H = 29.0
+LETTERS = "ABCDEFGH"
 PAGES = [names.SIGNATURE_ORDER[:8], names.SIGNATURE_ORDER[8:]]
-LAYOUTS = [FigureLayout("SuppFig8_p%d" % (k + 1), [Slot(sig, LETTERS[8 * k + i], 0, i * ROW_H, 183, ROW_H)
-                                                    for i, sig in enumerate(page)], max_height=247)
+LAYOUTS = [FigureLayout("SuppFig%d" % (k + 3), [Slot(sig, LETTERS[i], 0, i * ROW_H, 183, ROW_H)
+                                                for i, sig in enumerate(page)], max_height=247)
            for k, page in enumerate(PAGES)]
 INK = "#333333"
 NAN_GRAY = "#D3D3D3"
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig8_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/SuppFig3_4_%s.tsv" % key, sep="\t", index=False)
 
 
 def at_mm(sf, x, y, runs, gid, size=BASE, ha="left", va="center"):
@@ -102,7 +101,7 @@ def signature_row(sf, sig, xy, values, units, genes):
     t = ST.tests(units, colname)
     ST.check_against_saved("signature " + sig, t)
     specs = ST.brackets(units, colname, t, 0.05, "signature")
-    ax = axes_mm(sf, 82.0, 5.5, 60.0, 14.0)
+    ax = axes_mm(sf, 82.0, 5.5, 60.0, 13.0)
     lo, hi = units[colname].min(), units[colname].max()
     ax.set_ylim(lo - 0.05 * (hi - lo), hi + 0.05 * (hi - lo))
     plots.stage_box(ax, units, colname, specs, key + "-stage", ylabel="Mean activity", point=1.0)
@@ -113,7 +112,7 @@ def signature_row(sf, sig, xy, values, units, genes):
     # (4) mean activity of malignant PCs by cytogenetic group (BM and PB samples)
     cy = units[units["annotation"].eq("tumor") & units["cytogenetics"].notna()]
     cy = cy.assign(value=cy[colname].astype(float), group=cy["cytogenetics"])
-    ac = axes_mm(sf, 152.0, 5.5, 30.5, 14.0)
+    ac = axes_mm(sf, 152.0, 5.5, 30.5, 13.0)
     plots.box_strip(ac, cy, P.CYTO_ORDER, P.CYTO, key + "-cyto", point=1.0, rotate=90, label_size=SMALL, n_labels="row",
                     width=0.62, jitter=0.18, edge=0.25)
     clo, chi = cy["value"].min(), cy["value"].max()
@@ -131,7 +130,7 @@ def main():
     xy, scores, snames = load_cells()
     genes = pd.read_csv(paths.cache("hotspot_genes.tsv"), sep="\t")
     units = ST.signature_units()
-    pdfs, tops, brs = [], [], []
+    tops, brs = [], []
     with style():
         for lay, page in zip(LAYOUTS, PAGES):
             fig, pn = new_figure(lay)
@@ -145,17 +144,6 @@ def main():
             fi, ntext = file_checks(svg, pdf, lay)
             print(report(lay.name, issues + fi, "SVG text elements: %d" % ntext))
             print("\n".join(issues + fi) or "ALL CHECKS PASS")
-            pdfs.append(pdf)
-    out = fitz.open()
-    for p in pdfs:
-        with fitz.open(p) as d:
-            out.insert_pdf(d)
-    out.set_metadata({"author": AUTHOR})                                  # same author as the one-page figures
-    target = os.path.join(paths.FIGURES, "SuppFig8.pdf")
-    out.save(target, garbage=3, deflate=True, no_new_id=True)
-    out.close()
-    for p in pdfs:
-        os.remove(p)
     cols = ["mean_expr:" + s for s in names.SIGNATURE_ORDER]
     source("activity_per_patient", units[["patient_id", "disease_status", "sample_type", "annotation", "cytogenetics"] + cols]
            .rename(columns={c: names.SIGNATURES[c.split(":")[1]] for c in cols}))

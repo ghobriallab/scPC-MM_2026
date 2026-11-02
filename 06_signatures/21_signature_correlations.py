@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Genes per signature, genes shared between signatures and Spearman correlations between the activities of the 16 signatures across the BM
-tumors (Supplementary Fig. 7D; Results; Methods, detection of single-cell transcriptional signatures).
+tumors (Extended Data Fig. 5D; Results; Methods, detection of single-cell transcriptional signatures).
 
 Purpose:      1. Genes per signature and genes assigned to more than one signature in the consensus signature table. 2. Spearman correlation of
               the 16 signature activities (mean log-normalized expression of the signature genes, averaged over the

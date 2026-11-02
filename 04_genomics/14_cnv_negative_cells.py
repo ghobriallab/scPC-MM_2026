@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Malignant PCs without detectable CNV: tumors without any CNV by cytogenetic group, stage and cell number, CNV-negative
 cells within tumors with CNVs and their kNN neighborhoods, and CNV clones by stage (Results; Methods, Copy number variant
-detection; Supplementary Figs. 1C, 2).
+detection; Extended Data Figs. 1C and 2).
 
 Purpose:      Malignant PCs (expanded BCR clonotype) of each patient with >= 30 of them, BM and PB pooled (a patient
               sampled at two stages takes the later stage). A cell is CNV-positive when Numbat gives p_cnv >= 0.9 for at
@@ -191,7 +191,7 @@ cnt = cell.groupby(["patient_id", "cnv_cell"]).size().unstack(fill_value=0)
 pt["cells_analyzed_cnvpos_tumor"] = cnt.sum(axis=1)
 pt["pct_cnv_negative_cells"] = 100 * cnt["CNV-negative"] / cnt.sum(axis=1)
 
-# CNV clones by stage (Supplementary Fig. 1C: BM samples with >= 100 malignant PCs, CNV clone of the phylogeny table)
+# CNV clones by stage (Extended Data Fig. 1C: BM samples with >= 100 malignant PCs, CNV clone of the phylogeny table)
 cl = pd.read_pickle(data("paper", "cnvs", "clone-phylogeny-data.pkl"))
 cl = cl[cl["GT"].notna() & (cl["sample_type"] == "BM")]
 cl["disease_status"] = stages(cl["patient_id"], cl["sample_type"], cl["disease_status"])

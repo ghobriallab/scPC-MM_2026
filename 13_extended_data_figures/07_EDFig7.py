@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 13: MGUS malignant PCs called MM, and malignancy scores in external single-cell datasets.
+"""Extended Data Figure 7: MGUS malignant PCs called MM, and malignancy scores in external single-cell datasets.
 
 Purpose:      All scores are out-of-sample. A, percentage of malignant PCs called MM (MST score > 0.5) per MGUS and MM
               patient of the MGUS-MM classifier; diamonds, test-set patients. B, MST score and malignancy score of the
@@ -11,7 +11,7 @@ Inputs:       results/classifiers: misclassified_mgus_cells.pkl.gz, misclassifie
               misclassified_mgus_within_patient.tsv, external_malignancy_units.tsv,
               external_malignancy_stats.tsv.
 
-Outputs:      figures/SuppFig13.svg, SuppFig13.pdf; figures/source_data/SuppFig13_*.tsv.
+Outputs:      figures/EDFig7.svg, EDFig7.pdf; figures/source_data/EDFig7_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -31,7 +31,7 @@ from figstyle import style, rich_text, p_runs, n_runs, rng, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 from plots import at_mm
 
-LAYOUT = FigureLayout("SuppFig13", [
+LAYOUT = FigureLayout("EDFig7", [
     Slot("pct_called_mm", "A", 0, 0, 27, 50),
     Slot("mgus_like_vs_mm_like", "B", 29, 0, 58, 50),
     Slot("external_malignancy", "C", 0, 52, 122, 50),
@@ -43,7 +43,7 @@ EXT_COLORS = {g: (P.NORMAL if g.endswith("normal") else P.TUMOR)[STAGE3[g.split(
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig13_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig7_%s.tsv" % key, sep="\t", index=False)
 
 
 def panel_pct(sf, cells):
@@ -156,7 +156,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig13", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig7", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

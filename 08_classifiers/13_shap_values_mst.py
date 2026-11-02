@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """SHAP values of the MGUS-MM random forest (the MST tier) for one cross-validation fold (feature ranking used by the
-feature ablation, Supplementary Fig. 12E).
+feature ablation, Extended Data Fig. 6E).
 
 Purpose:      Fits the MGUS vs MM forest with the tuned parameters (200 trees, max_features sqrt, max_depth 25,
               min_samples_split 20, min_samples_leaf 10, bootstrap, balanced class weights) on the malignant training cells

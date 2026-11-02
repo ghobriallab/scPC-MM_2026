@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 3: batch structure of the PC UMAP, and paired BM and PB samples.
+"""Extended Data Figure 3: batch structure of the PC UMAP, and paired BM and PB samples.
 
 Purpose:      A, origin of the 30 nearest neighbors of each PC in the graph of the Fig. 1C UMAP, mean over individuals.
               B, per-patient UMAPs of three same-visit BM and PB pairs (at most 800 cells per tissue and PC status
@@ -7,7 +7,7 @@ Purpose:      A, origin of the 30 nearest neighbors of each PC in the graph of t
 
 Inputs:       results/preprocessing: batch_neighbor_composition.tsv, batch_patient_umaps.tsv.gz.
 
-Outputs:      figures/SuppFig3.svg, SuppFig3.pdf; figures/source_data/SuppFig3_A.tsv.
+Outputs:      figures/EDFig3.svg, EDFig3.pdf; figures/source_data/EDFig3_A.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -26,7 +26,7 @@ from checks import figure_checks, file_checks, report
 from figstyle import style, rich_text, rng, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 
-LAYOUT = FigureLayout("SuppFig3", [Slot("neighbors", "A", 0, 0, 44, 60), Slot("paired_umaps", "B", 46, 0, 137, 60)],
+LAYOUT = FigureLayout("EDFig3", [Slot("neighbors", "A", 0, 0, 44, 60), Slot("paired_umaps", "B", 46, 0, 137, 60)],
                       max_height=247)
 PT_MM = 25.4 / 72.0
 COMP = [("same_sample", "Same sample", "#4D4D4D"), ("same_individual_other_sample", "Same individual, other sample", "#A6A6A6"),
@@ -58,7 +58,7 @@ def panel_neighbors(sf, C):
               size=SMALL, ms=2.3, marker="s", row_pt=2.1 / PT_MM, gid="pn-kA")
     out = m.reset_index().rename(columns={"cell_type": "PC status"})
     out.insert(1, "individuals", [int((C["cell_type"] == o).sum()) for o in order])
-    out.to_csv(paths.SOURCE_DATA + "/SuppFig3_A.tsv", sep="\t", index=False)
+    out.to_csv(paths.SOURCE_DATA + "/EDFig3_A.tsv", sep="\t", index=False)
 
 
 def panel_umaps(sf, U):
@@ -93,7 +93,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig3", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig3", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

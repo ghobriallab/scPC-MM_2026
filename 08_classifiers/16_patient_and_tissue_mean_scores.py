@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Malignancy and MST scores of every PC and their means per patient and per tissue sample, by disease stage, tissue and
-PC status, with the comparisons between groups (Fig. 4D,E; Fig. 5; Supplementary Fig. 14).
+PC status, with the comparisons between groups (Fig. 4D,E; Fig. 5; Extended Data Fig. 8).
 
 Purpose:      Scores every PC with the two final forests (15_final_models_and_cell_scores.py) on its kNN-30 smoothed
               features (malignancy tier: z-scored mean expression of the 16 signatures and senescence score + partner

@@ -29,7 +29,7 @@ SIGNATURES = {
     "histone_chaperone_gene": "Histone/chaperone",
     "extracellular_matrix": "Extracellular matrix",
 }
-SIGNATURE_ORDER = list(SIGNATURES)          # order of Supplementary Fig. 8 (A-P)
+SIGNATURE_ORDER = list(SIGNATURES)          # order of Supplementary Figs. 3 and 4 (A-P)
 # as classifier features, signatures whose short name is also a gene or a cytogenetic group carry "signature"
 FEATURE_NAMES = {"HRD_signature": "HRD signature", "MAF*_signature": "MAF* signature",
                  "MCL1-BCL2_signature": "MCL1-BCL2 signature"}

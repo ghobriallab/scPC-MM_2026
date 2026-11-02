@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Activity of the 16 signatures across bone marrow cell types, and its association with disease stage in bone marrow
-immune cells, in two public scRNA-seq datasets (Supplementary Fig. 7C; Results; Methods, signature activity in other bone
+immune cells, in two public scRNA-seq datasets (Extended Data Fig. 5C; Results; Methods, signature activity in other bone
 marrow cell types).
 
 Purpose:      Signature activity = mean log-normalized expression (counts per 10,000, log1p) of the signature's genes in

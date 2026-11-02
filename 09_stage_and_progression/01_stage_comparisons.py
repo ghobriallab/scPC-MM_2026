@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Stage comparisons of tumor fraction, signature activity and malignancy and MST scores per patient (Figs. 3C and
-4D,E; Supplementary Figs. 1B and 8).
+4D,E; Extended Data Fig. 1B and Supplementary Figs. 3 and 4).
 
 Purpose:      Units: the mean signature activity, malignancy score and MST score of the malignant or of the normal PCs
               of one patient at one disease stage in one tissue (BM or PB). SMM risk groups follow the IMWG 2/20/20
@@ -142,7 +142,7 @@ def record(panel, tests):
             rows.append({"panel": panel, "test": key, "comparison": comp, "p": t.loc[comp, "p"], "fdr": t.loc[comp, "fdr"]})
 
 
-# ---- signature activity (Fig. 3C, Supplementary Fig. 8) ---------------------------------------------------------------
+# ---- signature activity (Fig. 3C, Supplementary Figs. 3 and 4) ---------------------------------------------------------------
 for col in sig_cols:
     record("signature " + col.split(":")[1], panel_tests(sig_units, col))
 
@@ -150,7 +150,7 @@ for col in sig_cols:
 for col in ("Malignancy Score", "MST Score"):
     record("score " + col, panel_tests(prob_units, col))
 
-# ---- tumor fraction per patient and stage, BM and PB (Supplementary Fig. 1B) --------------------------------------------
+# ---- tumor fraction per patient and stage, BM and PB (Extended Data Fig. 1B) --------------------------------------------
 cells["stage_clinical"] = stages(cells["patient_id"], cells["sample_type"], cells["disease_status"])
 
 

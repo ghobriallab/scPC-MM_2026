@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Grid search of the random forest parameters of each tier on its own: the MGUS-MM tier and three versions of the
-malignancy tier (Methods, classifier development; Supplementary Fig. 12D).
+malignancy tier (Methods, classifier development; Extended Data Fig. 6D).
 
 Purpose:      Training cells of donors, MGUS and MM patients (SMM removed), cohort-smoothed features. MGUS-MM tier
               (part-cohort-DS-auc-gm16-arm): malignant PCs only, MGUS vs MM, AUCell scores of the 16 signatures + CNV-arm

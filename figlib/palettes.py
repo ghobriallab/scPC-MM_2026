@@ -46,7 +46,7 @@ def darker(hex_color, f=0.6):
 
 CYTO_HRD = {"%s+HRD" % k: darker(v) for k, v in CYTO.items() if k not in ("HRD", "Other")}
 
-# ---- the 16 transcriptional signatures (heatmap order of Fig. 3A, Supplementary Fig. 8 order) ---------------------
+# ---- the 16 transcriptional signatures (heatmap order of Fig. 3A, Supplementary Figs. 3 and 4 order) ---------------------
 # 16 of 46 color-blind-safe colors (Tol, Okabe-Ito) by greedy max-min CIEDE2000 over normal vision and the three
 # simulations (minimum 8.2), ordered so that neighbors in the Fig. 3A color strip differ by at least 29.7
 SIGNATURE = {"cell_cycling_G2M": "#009E73", "cell_cycling_G1S": "#332288", "B_cell_activation": "#99DDFF",
@@ -56,7 +56,7 @@ SIGNATURE = {"cell_cycling_G2M": "#009E73", "cell_cycling_G1S": "#332288", "B_ce
              "MAF*_signature": "#0077BB", "MHC-I_gene_module": "#BBCC33", "vacuole_ER_signaling": "#CC79A7",
              "histone_chaperone_gene": "#228833", "extracellular_matrix": "#FFAABB"}
 
-# ---- the longitudinally sampled patients (Supplementary Figs. 9A, 14C) ---------------------------------------------------------
+# ---- the longitudinally sampled patients (Supplementary Fig. 5A and Extended Data Fig. 8C) ---------------------------------------------------------
 PATIENT3 = {"Pt-28": "#0072B2", "Pt-122": "#D55E00", "Pt-160": "#009E73"}
 
 # ---- isotypes ----------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ CMAP_EXPR = "viridis"
 
 CATEGORICAL = {"stage (embeddings)": STAGE, "PC status": PC_STATUS, "cytogenetic group": CYTO,
                "cytogenetic group with +HRD": dict(CYTO, **CYTO_HRD), "isotype": ISOTYPE,
-               "low/medium/high": LOW_MED_HIGH, "tissue": TISSUE, "signature": SIGNATURE, "patients (Supplementary Fig. 14C)": PATIENT3,
+               "low/medium/high": LOW_MED_HIGH, "tissue": TISSUE, "signature": SIGNATURE, "patients (Extended Data Fig. 8C)": PATIENT3,
                "brackets": {"malignant vs normal": BRACKET_MAL, "between stages": BRACKET_STAGE}}
 ORDINAL = {"malignant PCs by stage": [TUMOR[s] for s in STAGES[1:]],
            "normal PCs by stage": [NORMAL[s] for s in STAGES[1:]]}

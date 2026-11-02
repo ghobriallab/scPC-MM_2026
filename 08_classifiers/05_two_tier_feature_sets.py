@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Cross-validated accuracy of the two-tier classifier (malignant vs normal, then MGUS vs MM) for every combination of
-the feature sets of the two tiers (Supplementary Fig. 12B; Methods, classifier development).
+the feature sets of the two tiers (Extended Data Fig. 6B; Methods, classifier development).
 
 Purpose:      Training cells of donors, MGUS and MM patients (SMM removed), cohort-smoothed and patient-smoothed versions.
               Tier 1: random forest for malignant vs normal PCs; tier 2: random forest for MGUS vs MM trained on the

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Malignancy and MST scores of the CoMMpass baseline BM samples from the final random forest classifiers (Fig. 5D;
-Supplementary Fig. 15A,B).
+Extended Data Fig. 9A,B).
 
 Purpose:      The final malignancy and MGUS-MM classifiers (kNN-smoothed features, k = 30) score each sample from its
               signature, CNV-arm and partner-gene scores, in log1p TPM (exr) and DESeq2 VST (vst) units, with the

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """AnnData objects of the PCs of Dang et al., Cancer Cell 2023 (EGAS00001006694): counts, log-normalized counts and
-embedding, for the external validation of the malignancy and MST scores (Fig. 5C; Supplementary Figs. 13C, 14E).
+embedding, for the external validation of the malignancy and MST scores (Fig. 5C; Extended Data Figs. 7C and 8E).
 
 Purpose:      Writes the cell-barcode list of every count file (Cell Ranger filtered matrices, one per sample). For each
               sample of the authors' PC annotation, loads the count file whose cell barcodes match it (the file of the same

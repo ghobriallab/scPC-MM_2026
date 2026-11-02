@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Training and held-out cells of the five cross-validation folds of the two-tier classifier, for the SHAP feature ranking
-(the ranking used by the feature ablation, Supplementary Fig. 12E).
+(the ranking used by the feature ablation, Extended Data Fig. 6E).
 
 Purpose:      Training cells of donors, MGUS and MM patients (SMM removed), cohort-smoothed features as in the final
               classifier: malignancy tier = z-scored mean expression of the 16 signatures and senescence score + partner

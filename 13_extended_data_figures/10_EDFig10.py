@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 16: stage associations of the MST score and of the five progression-associated signatures with
+"""Extended Data Figure 10: stage associations of the MST score and of the five progression-associated signatures with
 and without adjustment for genetic alterations, and histone/chaperone activity and tumor ploidy.
 
 Purpose:      A, change per disease-stage step (MGUS to MM, in SD of the outcome) from a linear regression on stage,
@@ -14,7 +14,7 @@ Purpose:      A, change per disease-stage step (MGUS to MM, in SD of the outcome
 Inputs:       results/stage_and_progression: stage_effects_genetics.tsv, bm_tumor_units.tsv, histone_dna_content.tsv,
               histone_dna_content_units.tsv, histone_dna_content_tests.tsv.
 
-Outputs:      figures/SuppFig16.svg, SuppFig16.pdf; figures/source_data/SuppFig16_*.tsv.
+Outputs:      figures/EDFig10.svg, EDFig10.pdf; figures/source_data/EDFig10_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -37,7 +37,7 @@ from figstyle import style, rich_text, p_runs, rho_runs, join_runs, n_runs, SMAL
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 from plots import at_mm
 
-LAYOUT = FigureLayout("SuppFig16", [
+LAYOUT = FigureLayout("EDFig10", [
     Slot("stage_effects_adjusted", "A", 0, 0, 122, 52),
     Slot("ploidy_by_stage", "B", 124, 0, 59, 52),
     Slot("histone_vs_ploidy", "C", 0, 54, 95, 60),
@@ -50,7 +50,7 @@ GRAY, PURPLE = "#9E9E9E", "#54278F"
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig16_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig10_%s.tsv" % key, sep="\t", index=False)
 
 
 def close(a, b, rel=1e-6):
@@ -225,7 +225,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig16", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig10", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

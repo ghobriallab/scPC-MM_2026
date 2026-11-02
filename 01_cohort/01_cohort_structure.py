@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Individuals, samples and PCs by disease stage and tissue, sampling designs and the individuals or tumors kept by each
-analysis (Supplementary Fig. 1A; Supplementary Table 1; Methods, Cohort structure and repeat samples).
+analysis (Extended Data Fig. 1A; Supplementary Table 1; Methods, Cohort structure and repeat samples).
 
 Purpose:      Counts individuals, samples and plasma cells (PCs) passing QC by disease stage and tissue (an individual
               sampled at two stages is counted at both), classifies the sampling design of each individual (one BM
@@ -27,7 +27,7 @@ Outputs:      results/cohort/cohort_by_stage.tsv: per stage, individuals, sample
               results/cohort/individuals.tsv: one row per individual (Pt-/HD- label only): samples, time points, design.
               results/cohort/analysis_units.tsv: per-patient analysis units (individual x stage x tissue) by tissue.
               results/cohort/analysis_use.tsv: tissue, unit, repeat samples and cell thresholds of each analysis.
-              results/cohort/analysis_flow.tsv: individuals or tumors kept by each analysis (Supplementary Fig. 1A).
+              results/cohort/analysis_flow.tsv: individuals or tumors kept by each analysis (Extended Data Fig. 1A).
               results/cohort/supplementary_table1_cohort.xlsx: cohort by stage, sampling design and use in analyses.
               results/cohort/cohort_structure_log.txt: counts printed by the script.
 
@@ -190,33 +190,33 @@ for name in ["train", "test"]:
 u = units.set_index(["stage_labels", "tissue"])["units"]
 lt3 = lt[lt["stages"].str.contains("/")]
 use = pd.DataFrame([
-    ["Cohort overview, tumor fraction", "Fig. 1B; Supplementary Fig. 1B", "BM and PB",
+    ["Cohort overview, tumor fraction", "Fig. 1B; Extended Data Fig. 1B", "BM and PB",
      "Individual (Fig. 1B); individual, stage and tissue (tumor fraction)", "All samples shown; cells pooled per tissue", "None",
      "%d individuals" % len(ind)],
-    ["CNV inference and cytogenetic classification", "Supplementary Figs. 1C, 2", "BM and PB pooled",
+    ["CNV inference and cytogenetic classification", "Extended Data Figs. 1C and 2", "BM and PB pooled",
      "Patient (main malignant clone)", "Malignant PCs of all samples of a patient pooled", "Clones of at least 100 cells (CNV)",
      "%d patients with malignant PCs" % mal["patient_id"].nunique()],
-    ["Within-patient malignant vs normal PCs (therapeutic targets, stable DEGs)", "Fig. 2A; Supplementary Figs. 3, 4", "BM",
+    ["Within-patient malignant vs normal PCs (therapeutic targets, stable DEGs)", "Fig. 2A; Extended Data Figs. 1 and 2", "BM",
      "Patient and stage", "Samples of the same stage pooled", "At least 30 malignant and 30 normal PCs", ""],
     ["Gene universe for signature discovery (pseudobulk DE)", "Methods", "BM and PB (BM vs PB only within patients with both)",
      "Patient, stage and tissue", "Samples of the same stage and tissue pooled", "At least 30 cells per pseudobulk", ""],
     ["Signature discovery (Hotspot)", "Fig. 3A,B", "BM + PB run and BM-only run",
      "Cells", "Pooled across samples, stages and visits", "At most 1,000 malignant and 1,000 normal PCs per individual and tissue", ""],
-    ["Signature activity, malignancy and MST scores across stages", "Fig. 3C; Fig. 4D,E; Supplementary Figs. 6, 11",
+    ["Signature activity, malignancy and MST scores across stages", "Fig. 3C; Fig. 4D,E; Extended Data Figs. 3 and 4; Extended Data Fig. 8D",
      "BM and PB analyzed separately", "Individual, stage, tissue and cell type (mean of all PCs)",
      "Samples of the same stage and tissue pooled", "None",
      "%d BM and %d PB units" % (u[("cell table (as analyzed)", "BM")], u[("cell table (as analyzed)", "PB")])],
-    ["Malignancy and MGUS-MM classifiers", "Fig. 4A-C; Supplementary Fig. 10", "BM",
+    ["Malignancy and MGUS-MM classifiers", "Fig. 4A-C; Extended Data Fig. 6", "BM",
      "Individual (each in the training or the test set only)", "One stage per individual; cells downsampled",
      "Patients with at least 500 malignant PCs; donors with at least 500 normal PCs", "%d training, %d test individuals" % (n_cls["train"], n_cls["test"])],
-    ["Longitudinal examples", "Fig. 3D; Supplementary Figs. 7A, 11A", "BM and PB",
+    ["Longitudinal examples", "Extended Data Fig. 8C; Supplementary Fig. 1A", "BM and PB",
      "Visit", "Each visit shown separately", "None", "%d patients sampled at two SMM risk levels" % len(lt3)],
-    ["MST and genomic progression scores (WGS)", "Fig. 5C,D; Supplementary Fig. 12A", "BM",
+    ["MST and genomic progression scores (WGS)", "Fig. 5E,F; Extended Data Fig. 9C,D", "BM",
      "Sample", "The BM sample analyzed by WGS", "None", "84 samples"],          # WGS-matched BM samples (Results)
 ], columns=["analysis", "figures", "tissue", "unit_of_analysis", "repeat_samples", "cell_thresholds", "n"])
 use.to_csv(OUT / "analysis_use.tsv", sep="\t", index=False)
 
-# ---- analysis flow: how many individuals or tumors each analysis kept (Supplementary Fig. 1A) ------
+# ---- analysis flow: how many individuals or tumors each analysis kept (Extended Data Fig. 1A) ------
 flow = []
 
 
@@ -270,7 +270,7 @@ add("individuals_several_visits", len(lt))
 add("SMM_patients_two_risk_levels", len(lt3))
 flow = pd.DataFrame(flow)
 flow.to_csv(OUT / "analysis_flow.tsv", sep="\t", index=False)
-log("\nanalysis flow (Supplementary Fig. 1A):\n" + flow.to_string(index=False))
+log("\nanalysis flow (Extended Data Fig. 1A):\n" + flow.to_string(index=False))
 
 # ---- Supplementary Table 1, cohort sheets -----------------------------------------------------------
 nice = {"stage": "Disease stage at sampling", "individuals": "Individuals", "individuals_with_BM": "Individuals with BM",

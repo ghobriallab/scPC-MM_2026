@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """MST scores of SMM patients who later progressed to MM versus those who did not, and comparison with the IMWG 2/20/20
-risk group (Fig. 5A; Supplementary Fig. 14A,B; Results).
+risk group (Fig. 5A; Extended Data Fig. 8A,B; Results).
 
 Purpose:      One unit per SMM patient: the mean MST score of the malignant BM PCs of the patient at one IMWG 2/20/20
               risk group (patient-level score table, risk.py; units that share a risk group are pooled, weighted by

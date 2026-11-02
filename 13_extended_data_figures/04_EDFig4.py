@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 4: cytogenetic classification at the single-cell level.
+"""Extended Data Figure 4: cytogenetic classification at the single-cell level.
 
 Purpose:      A, data used to call the cytogenetic group of the 182 patients (UpSet plot: a call counts for FISH and WGS
               when it names a group, for scRNA-seq when it equals the final call; patients of the group Other count for
@@ -10,7 +10,7 @@ Purpose:      A, data used to call the cytogenetic group of the 182 patients (Up
 
 Inputs:       data/paper: cytogenetics-status.csv, cohort-clinical-metadata.csv; results/figure_inputs/tumors_cells.npz.
 
-Outputs:      figures/SuppFig4.svg, SuppFig4.pdf; figures/source_data/SuppFig4_*.tsv.
+Outputs:      figures/EDFig4.svg, EDFig4.pdf; figures/source_data/EDFig4_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -33,7 +33,7 @@ from checks import figure_checks, file_checks, report
 from figstyle import style, rich_text, rich_width_pt, SMALL, BASE, LW
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 
-LAYOUT = FigureLayout("SuppFig4", [
+LAYOUT = FigureLayout("EDFig4", [
     Slot("assay_upset", "A", 0, 0, 183, 44),
     Slot("partner_boxes", "B", 0, 46, 183, 92),
     Slot("partner_umaps", "C", 0, 140, 135, 62),
@@ -47,7 +47,7 @@ STAGES5 = ["MGUS", "LRSMM", "IRSMM", "HRSMM", "MM"]
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig4_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig4_%s.tsv" % key, sep="\t", index=False)
 
 
 def at_mm(sf, x, y, runs, gid, size=BASE, ha="left", va="center"):
@@ -285,7 +285,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig4", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig4", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

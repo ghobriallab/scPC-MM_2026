@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 12: feature selection and parameter tuning of the malignancy and MST classifiers.
+"""Extended Data Figure 6: feature selection and parameter tuning of the malignancy and MST classifiers.
 
 Purpose:      Mean and SD of the accuracy over the cross-validation folds. A, malignancy classifier (random forest and
               logistic regression): accuracy of the 16 feature sets under three smoothing strategies; selected setting
@@ -15,7 +15,7 @@ Purpose:      Mean and SD of the accuracy over the cross-validation folds. A, ma
 Inputs:       results/figure_inputs: tuning_tumor_normal.tsv, tuning_mgus_mm.tsv, tuning_knn.tsv;
               results/classifiers/feature_ablation_mst.tsv.
 
-Outputs:      figures/SuppFig12.svg, SuppFig12.pdf; figures/source_data/SuppFig12_*.tsv.
+Outputs:      figures/EDFig6.svg, EDFig6.pdf; figures/source_data/EDFig6_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -38,7 +38,7 @@ from figstyle import style, rich_text, rich_width_pt, text_advance_pt, LW, SMALL
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 from plots import at_mm
 
-LAYOUT = FigureLayout("SuppFig12", [
+LAYOUT = FigureLayout("EDFig6", [
     Slot("tuning_malignancy", "A", 0, 0, 183, 51),
     Slot("tuning_mgus_mm", "B", 0, 53, 92, 117),
     Slot("tuning_knn", "C", 95, 53, 88, 31),
@@ -75,7 +75,7 @@ KNN = [("mean_acc", "Overall", "#000000"), ("MM_mean_acc", "MM", "#A11A5B"), ("M
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig12_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig6_%s.tsv" % key, sep="\t", index=False)
 
 
 # ---- bump charts (A, B top) ------------------------------------------------------------------------------------------
@@ -340,7 +340,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig12", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig6", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Cross-validated accuracy of malignant versus normal PC classifiers for 32 feature sets, three versions of the training
-data and two model types (Supplementary Fig. 12A; Methods, classifier development).
+data and two model types (Extended Data Fig. 6A; Methods, classifier development).
 
 Purpose:      Training cells of all disease stages and donors (01_training_test_split.py); label = malignant (tumor) or
               normal PC. Features: mean-expression scores and partner genes z-scored, CNV-arm scores quantile-normalized

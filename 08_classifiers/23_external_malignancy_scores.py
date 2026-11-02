@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Malignancy scores of the PCs of three external single-cell studies compared with the malignant and normal PC labels of
-the original authors (Supplementary Fig. 13C; Results, external validation).
+the original authors (Extended Data Fig. 7C; Results, external validation).
 
 Purpose:      The final malignancy random forest scores the cells of Ledergor et al. 2018, Boiarsky et al. 2022 and Dang
               et al. 2023. Its 26 features (mean expression of the 16 signatures, the SenMayo senescence set, then CCND1,

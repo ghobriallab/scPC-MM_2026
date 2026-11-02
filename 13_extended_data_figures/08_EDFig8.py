@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 14: prediction of progression in SMM, serially sampled patients, scores by cytogenetic
+"""Extended Data Figure 8: prediction of progression in SMM, serially sampled patients, scores by cytogenetic
 group and the MST score in external single-cell datasets.
 
 Purpose:      A, MST scores of the 115 SMM patients by later progression to MM; two-sided Wilcoxon rank-sum P. B, ROC
@@ -19,7 +19,7 @@ Inputs:       results/stage_and_progression: smm_progression_patient_scores.tsv,
               mm_like_cells_tumors.tsv, mm_like_cells_smm.tsv, bm_tumor_units.tsv, stage_effects_genetics_tests.tsv; results/figure_inputs: longitudinal_cells.npz,
               longitudinal_signatures.npz, external_<study>.npz, patient_id_mean_probability.csv.gz.
 
-Outputs:      figures/SuppFig14.svg, SuppFig14.pdf; figures/source_data/SuppFig14_*.tsv.
+Outputs:      figures/EDFig8.svg, EDFig8.pdf; figures/source_data/EDFig8_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -46,14 +46,14 @@ from figstyle import style, rich_text, rich_width_pt, p_runs, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 from plots import at_mm
 
-LAYOUT = FigureLayout("SuppFig14", [
+LAYOUT = FigureLayout("EDFig8", [
     Slot("smm_progressors", "A", 0, 0, 34, 47),
     Slot("progression_roc", "B", 36, 0, 50, 47),
     Slot("serial_umaps", "C", 88, 0, 95, 47),
-    Slot("serial_signatures", "", 0, 49, 93, 69),
-    Slot("serial_violins", "", 95, 49, 88, 69),
-    Slot("scores_by_cytogenetics", "D", 0, 120, 183, 47),
-    Slot("external_umaps", "E", 0, 169, 183, 42),
+    Slot("serial_signatures", "", 0, 49, 93, 66),
+    Slot("serial_violins", "", 95, 49, 88, 66),
+    Slot("scores_by_cytogenetics", "D", 0, 117, 183, 42),
+    Slot("external_umaps", "E", 0, 161, 183, 40),
 ], max_height=247)
 PT_MM = 25.4 / 72.0
 RISK = {"LRSMM": 0, "IRSMM": 1, "HRSMM": 2}
@@ -80,7 +80,7 @@ STUDIES = [("ledergor", "Ledergor et al."), ("boiarsky", "Boiarsky et al."), ("d
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig14_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig8_%s.tsv" % key, sep="\t", index=False)
 
 
 def close(a, b, rel=1e-6):
@@ -298,7 +298,7 @@ def panel_serial_violins(sf, d):
     for p in PATIENTS:
         xs[p] = x
         x += widths[p] + 2.5
-    rows, tests = [("malignancy", "Malignancy score", 9.0), ("mst", "MST score", 30.0)], []
+    rows, tests = [("malignancy", "Malignancy score", 8.0), ("mst", "MST score", 26.5)], []
     for r, (col, ylab, y0) in enumerate(rows):
         row_axes, jobs = [], []
         for j, p in enumerate(PATIENTS):
@@ -376,7 +376,7 @@ def panel_cytogenetics(sf):
         ref = T[(T["test"] == "Kruskal-Wallis") & T["detail"].str.startswith(col)]
         assert len(ref) == 1
         close(p, float(ref["P"].iloc[0]))
-        ax = axes_mm(sf, 12.0 + 92.0 * k, 8.0, 76.0, 18.0)
+        ax = axes_mm(sf, 12.0 + 92.0 * k, 6.5, 76.0, 18.0)
         plots.box_strip(ax, u.assign(value=u[col].astype(float)), P.CYTO_ORDER, P.CYTO, "sf14d%d" % k, point=1.2,
                         rotate=90, label_size=SMALL, n_labels="row", width=0.62, jitter=0.18, edge=0.25)
         plots.refline(ax, 0.5)
@@ -414,12 +414,12 @@ def panel_external(sf):
         x0 = 4.0 + 57.5 * k
         at_mm(sf, x0 + 26.0, 1.6, name, "pn-study%d" % k, ha="center")
         xy = d[["x", "y"]].values
-        a1 = axes_mm(sf, x0, 7.0, 25.0, 25.0)
+        a1 = axes_mm(sf, x0, 6.5, 25.0, 25.0)
         order = np.argsort(d["mst"].values, kind="stable")
         plots.umap(a1, xy, plots.matplotlib_cm(P.CMAP_MST)(norm(d["mst"].values)), "sf14e-mst-%s" % study, s=0.12,
                    order=order, labels=(k == 0))
         a1.set_title("MST score", fontsize=SMALL, pad=1.2)
-        a2 = axes_mm(sf, x0 + 27.0, 7.0, 25.0, 25.0)
+        a2 = axes_mm(sf, x0 + 27.0, 6.5, 25.0, 25.0)
         plots.umap(a2, xy, np.array([EXT_COLORS[g] for g in d["group"]]), "sf14e-grp-%s" % study, s=0.12, labels=False)
         a2.set_title("Disease stage, PC status", fontsize=SMALL, pad=1.2)
         counts.append(d.groupby("group").size().reindex(EXT_GROUPS).fillna(0).astype(int).rename(name))
@@ -430,7 +430,7 @@ def panel_external(sf):
         rich_text(cax, 0, 1, [(word, "")], size=SMALL, ha="left", va="bottom",
                   transform=plots.pts(cax, 0, 3.8 + (1 - k) * SMALL * 1.2, cax.transAxes), gid="pn-cbt%d" % k)
     items = [(g, EXT_COLORS[g]) for g in EXT_GROUPS]
-    plots.key(sf, 4.0 / sf.w_mm, 1 - 36.5 / sf.h_mm, items, transform=sf.transSubfigure, size=SMALL, ms=2.4, ncol=7,
+    plots.key(sf, 4.0 / sf.w_mm, 1 - 35.5 / sf.h_mm, items, transform=sf.transSubfigure, size=SMALL, ms=2.4, ncol=7,
               gid="pn-key")
     source("E_cells_per_group", pd.concat(counts, axis=1).reset_index().rename(columns={"index": "group"}))
 
@@ -458,7 +458,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig14", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig8", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

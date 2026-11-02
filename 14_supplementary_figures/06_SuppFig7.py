@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 11: additional features of the malignancy and MST classifiers.
+"""Supplementary Figure 7: additional features of the malignancy and MST classifiers.
 
 Purpose:      A, SenMayo senescence score of every PC on the UMAP of Fig. 1C, and its mean per individual, disease stage,
               tissue and PC status, by stage (BM normal | BM malignant | PB normal | PB malignant) and, for malignant PCs,
@@ -13,7 +13,7 @@ Purpose:      A, SenMayo senescence score of every PC on the UMAP of Fig. 1C, an
 Inputs:       results/figure_inputs: pcs_cells.npz, pcs_senescence.npz, tumors_cells.npz, tumors_cnv.npz,
               patient_id_mean_probability.csv.gz.
 
-Outputs:      figures/SuppFig11.svg, SuppFig11.pdf; figures/source_data/SuppFig11_*.tsv.
+Outputs:      figures/SuppFig7.svg, SuppFig7.pdf; figures/source_data/SuppFig7_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -37,7 +37,7 @@ from figstyle import style, rich_text, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 from plots import at_mm
 
-LAYOUT = FigureLayout("SuppFig11", [
+LAYOUT = FigureLayout("SuppFig7", [
     Slot("senescence", "A", 0, 0, 183, 54),
     Slot("cnv_like_scores", "B", 0, 56, 183, 92),
 ], max_height=247)
@@ -46,7 +46,7 @@ CNV = {"Amplification": "#D55E00", "Neutral": "#BDBDBD", "Deletion": "#0072B2"}
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig11_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/SuppFig7_%s.tsv" % key, sep="\t", index=False)
 
 
 def cat(z, k):
@@ -188,7 +188,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig11", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("SuppFig7", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Malignant MGUS PCs that the MGUS-MM classifier calls MM: test-set recall, out-of-sample scores and within-patient
-comparisons (Fig. 4B,C; Supplementary Fig. 13A,B; Results and Methods).
+comparisons (Fig. 4B,C; Extended Data Fig. 7A,B; Results and Methods).
 
 Purpose:      1. Test-set cell-level recall of Fig. 4B,C: both random forests fit on the training cells (tuned parameters,
               seed 42) and applied to the test cells (malignancy tier: normal and malignant PCs; MGUS-MM tier: malignant

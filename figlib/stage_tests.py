@@ -1,5 +1,5 @@
 """Per-patient units and the stage tests drawn as brackets in the stage box plots (Figs. 3C, 4D,E;
-Supplementary Figs. 8, 11A, 14D).
+Supplementary Figs. 3, 4 and 7A and Extended Data Fig. 8D).
 
 Purpose:      A unit is the mean of the malignant or of the normal PCs of one patient, disease stage and tissue; SMM
               risk groups follow the IMWG 2/20/20 model (risk.py at the repository root). In each block (BM normal, BM malignant,

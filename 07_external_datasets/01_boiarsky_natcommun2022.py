@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """AnnData objects of the PCs of Boiarsky et al., Nat Commun 2022 (GSE193531): counts, log-normalized counts and embedding,
-for the external validation of the malignancy and MST scores (Fig. 5C; Supplementary Figs. 13C, 14E).
+for the external validation of the malignancy and MST scores (Fig. 5C; Extended Data Figs. 7C and 8E).
 
 Purpose:      Builds an AnnData object from the published UMI count matrix (genes x cells) and cell metadata (row i of the
               metadata = column i of the matrix), renames the metadata columns sample_ID, disease_stage and

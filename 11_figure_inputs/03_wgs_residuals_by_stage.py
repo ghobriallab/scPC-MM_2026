@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Association of the WGS regression residuals with disease stage (Supplementary Fig. 15C,D).
+"""Association of the WGS regression residuals with disease stage (Extended Data Fig. 9C,D).
 
 Purpose:      The MST score of the 84 patients with WGS was regressed on the WGS MM-like score (least squares) and on the
               WGS alterations (LASSO) in 01_extract_tables.py. This step tests whether the residuals of each model, the part

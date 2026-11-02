@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Ranking of the feature sets of the malignancy and MGUS-MM tiers by cross-validated accuracy, the basis of the feature
-choice of the final classifiers (Methods, classifier development; Supplementary Fig. 12A,B).
+choice of the final classifiers (Methods, classifier development; Extended Data Fig. 6A,B).
 
 Purpose:      Only feature sets built from the 16 signatures (gm16) are ranked: the six stage-wise DE gene sets (gm22)
               were selected with the MGUS, SMM and MM labels. Malignancy tier: gm16 feature sets of

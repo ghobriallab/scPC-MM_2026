@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 7: the sixteen signatures: GO terms, overlap with published signatures, activity across
+"""Extended Data Figure 5: the sixteen signatures: GO terms, overlap with published signatures, activity across
 bone marrow cell types and correlations between signatures.
 
 Purpose:      A, 45 representative GO terms (dots where FDR <= 0.05; size, -log10 FDR clipped at 8; color, genes of the
@@ -12,7 +12,7 @@ Purpose:      A, 45 representative GO terms (dots where FDR <= 0.05; size, -log1
 Inputs:       results/signatures: go_enrichment_selected.tsv, published_signature_overlap_pairs.tsv,
               signature_correlations_malignant.tsv; results/external_datasets/signature_activity_bm_cell_types.tsv.
 
-Outputs:      figures/SuppFig7.svg, SuppFig7.pdf; figures/source_data/SuppFig7_*.tsv.
+Outputs:      figures/EDFig5.svg, EDFig5.pdf; figures/source_data/EDFig5_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -35,11 +35,11 @@ from checks import figure_checks, file_checks, report
 from figstyle import style, rich_text, rich_width_pt, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 
-LAYOUT = FigureLayout("SuppFig7", [
-    Slot("go_terms", "A", 0, 0, 183, 117),
-    Slot("overlap", "B", 0, 119, 108, 126),
-    Slot("cell_types", "C", 110, 119, 73, 62),
-    Slot("correlations", "D", 110, 183, 73, 62),
+LAYOUT = FigureLayout("EDFig5", [
+    Slot("go_terms", "A", 0, 0, 183, 105.5),
+    Slot("overlap", "B", 0, 107, 108, 103),
+    Slot("cell_types", "C", 110, 107, 73, 51.5),
+    Slot("correlations", "D", 110, 158.5, 73, 51.5),
 ], max_height=247)
 PT_MM = 25.4 / 72.0
 SIG_COLUMNS = ["cell_cycling_G2M", "cell_cycling_G1S", "B_cell_activation", "MHC-II_immune_checkpoint",
@@ -51,7 +51,7 @@ TYPES = ["Malignant PCs", "Normal PCs", "B cells", "Pre-B cells", "T cells", "NK
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig7_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig5_%s.tsv" % key, sep="\t", index=False)
 
 
 def at_mm(sf, x, y, runs, gid, size=BASE, ha="left", va="center"):
@@ -105,8 +105,8 @@ def panel_go(sf):
     fmt = lambda x: x[0].upper() + x[1:]
     d = g[g["fdr"] <= 0.05].copy()
     d["mlog"] = np.clip(-np.log10(d["fdr"]), None, 8)
-    x0, cw, rh = 62.0, 4.4, 1.96
-    ax = axes_mm(sf, x0, 3.0, cw * 16, rh * 45)
+    x0, cw, rh = 62.0, 4.4, 1.8
+    ax = axes_mm(sf, x0, 2.2, cw * 16, rh * 45)
     for k in range(16):
         ax.axvline(k, color="#BDBDBD", lw=0.25, ls=(0, (2, 2)), zorder=0).set_gid("bg-grid")
     for r in range(45):
@@ -163,7 +163,7 @@ def panel_overlap(sf):
     co = leaves_list(linkage(J.values.T, "average"))
     J, Q = J.iloc[ro, co], Q.iloc[ro, co]
     assert J.shape == (42, 16)
-    cw, rh = 2.55, 2.05
+    cw, rh = 2.55, 1.8
     x0 = 49.0
     ax = axes_mm(sf, x0, 3.0, cw * 16, rh * 42)
     vmax = max(0.3, float(J.values.max()))
@@ -200,9 +200,9 @@ def panel_cell_types(sf):
     M = M.div(M.max(axis=1), axis=0)
     M = M.loc[M["Malignant PCs"].sort_values(ascending=False).index]
     n = T.drop_duplicates("cell_type").set_index("cell_type")["n_samples"]
-    cw, rh = 3.3, 2.15
+    cw, rh = 3.3, 1.8
     x0 = 24.0
-    ax = axes_mm(sf, x0, 3.0, cw * 12, rh * 16)
+    ax = axes_mm(sf, x0, 0.8, cw * 12, rh * 16)
     m = ax.pcolormesh(np.arange(13), np.arange(17), M.values, cmap="Purples", vmin=0, vmax=1, edgecolors="white",
                       linewidth=0.3)
     m.set_gid("mesh-celltypes")
@@ -229,9 +229,9 @@ def panel_correlations(sf):
     R = pd.read_csv(paths.result("signatures", "signature_correlations_malignant.tsv"), sep="\t", index_col=0)
     order = R.index[leaves_list(linkage(squareform(1 - R.values, checks=False), "average"))]
     R = R.loc[order, order]
-    cw = 2.15
+    cw = 1.8
     x0 = 24.0
-    ax = axes_mm(sf, x0, 3.0, cw * 16, cw * 16)
+    ax = axes_mm(sf, x0, 0.8, cw * 16, cw * 16)
     m = ax.pcolormesh(np.arange(17), np.arange(17), R.values, cmap="RdBu_r", norm=TwoSlopeNorm(0, -1, 1),
                       edgecolors="white", linewidth=0.3)
     m.set_gid("mesh-rho")
@@ -264,7 +264,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig7", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig5", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Cross-validated performance of the final two-tier classifier for k = 0 (no smoothing) to 100 neighbors of the kNN
-smoothing (Supplementary Fig. 12C; Methods, classifier development).
+smoothing (Extended Data Fig. 6C; Methods, classifier development).
 
 Purpose:      Training cells of donors, MGUS and MM patients (SMM removed). Malignancy tier: z-scored mean expression of
               the 16 signatures and senescence score + partner genes (100 trees, max_depth 30, min_samples_split 20,

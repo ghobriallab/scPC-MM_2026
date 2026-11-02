@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 5: sixteen therapeutic targets on the UMAP of Fig. 1C.
+"""Supplementary Figure 1: sixteen therapeutic targets on the UMAP of Fig. 1C.
 
 Purpose:      A, log-normalized expression of each target in every PC (viridis, highest values drawn last). B, per cell,
               the log2 fold change of its tumor (malignant versus normal PCs of the same BM sample) when the target is
@@ -10,7 +10,7 @@ Purpose:      A, log-normalized expression of each target in every PC (viridis, 
 Inputs:       results/figure_inputs: pcs_targets.npz, pcs_cells.npz; results/differential_expression:
               BM_scRNA_tumor_DE_FDR.csv, BM_scRNA_tumor_DE_logFoldChange.csv (IMWG 2/20/20 risk groups, risk.py).
 
-Outputs:      figures/SuppFig5.svg, SuppFig5.pdf; figures/source_data/SuppFig5_B_tumor_log2fc.tsv.
+Outputs:      figures/SuppFig1.svg, SuppFig1.pdf; figures/source_data/SuppFig1_B_tumor_log2fc.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -32,13 +32,13 @@ from layout import FigureLayout, Slot, new_figure, axes_mm, save
 
 TARGETS = ["TNFRSF17", "GPRC5D", "SDC1", "CD38", "SLAMF7", "FCRL5", "CD46", "CD47", "CD48", "NCAM1", "ITGB7", "CD74", "LY9",
            "TNFRSF13B", "CD19", "BCL2"]
-LAYOUT = FigureLayout("SuppFig5", [Slot("expression", "A", 0, 0, 183, 84), Slot("log2fc", "B", 0, 86, 183, 84)],
+LAYOUT = FigureLayout("SuppFig1", [Slot("expression", "A", 0, 0, 183, 84), Slot("log2fc", "B", 0, 86, 183, 84)],
                       max_height=247)
 COL_W, ROW_H, UM = 30.5, 26.8, 21.5
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig5_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/SuppFig1_%s.tsv" % key, sep="\t", index=False)
 
 
 def at_mm(sf, x, y, runs, gid, size=BASE, ha="left", va="center"):
@@ -124,7 +124,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig5", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("SuppFig1", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
     source("B_tumor_log2fc", tumors)
 

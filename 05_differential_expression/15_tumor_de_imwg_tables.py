@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Within-patient differential expression tables of malignant vs normal BM PCs labelled with the IMWG 2/20/20 risk
-groups (Fig. 2A,D-G; Supplementary Figs. 5, 6; Results).
+groups (Fig. 2A,D-G; Supplementary Figs. 1 and 2; Results).
 
 Purpose:      Columns of the per-tumor tables are named <patient>_BM_<stage>_tumor_<k> (one tumor = the malignant
               population k of one patient at one disease stage, BM samples of that stage pooled). Each column takes the

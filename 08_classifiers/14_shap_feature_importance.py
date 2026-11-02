@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mean absolute SHAP value of each feature of the two classifier tiers over the cross-validation folds, and
 cross-validated performance of feature subsets chosen from it (feature ranking used by the feature ablation,
-Supplementary Fig. 12E).
+Extended Data Fig. 6E).
 
 Purpose:      Collects the SHAP values of the held-out cells of the five folds (12_shap_values_malignancy.py,
               13_shap_values_mst.py; class tumor for the malignancy tier, class MM for the MGUS-MM tier), takes the mean

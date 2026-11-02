@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """AnnData objects of the PCs of Ledergor et al., Nat Med 2018 (GSE117156): counts, log-normalized counts and embedding,
-for the external validation of the malignancy and MST scores (Fig. 5C; Supplementary Figs. 13C, 14E).
+for the external validation of the malignancy and MST scores (Fig. 5C; Extended Data Figs. 7C and 8E).
 
 Purpose:      Reads the published MARS-seq counts (10x matrix format) with the cell table (joined by cell) and the sample
               table (joined by sample). Removes the patients with AL amyloidosis (samples AL*), sets the disease stage from

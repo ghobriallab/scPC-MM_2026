@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 9: the circulatory capacity signature.
+"""Supplementary Figure 5: the circulatory capacity signature.
 
-Purpose:      A, the two SMM patients sampled at two IMWG 2/20/20 risk levels (Supplementary Fig. 14C; risk.py): signature activity of every PC on their UMAP, their PC
+Purpose:      A, the two SMM patients sampled at two IMWG 2/20/20 risk levels (Extended Data Fig. 8C; risk.py): signature activity of every PC on their UMAP, their PC
               status, and per sample (BM PCs and malignant PB PCs); each comparison of malignant PCs of BM and PB at the
               same risk level is labeled with the AUROC of the two-sided Mann-Whitney test between cells, U / (n1 n2),
               the probability that a malignant PB PC has the higher activity (exact P in the source data). B, CoMMpass:
@@ -12,13 +12,13 @@ Purpose:      A, the two SMM patients sampled at two IMWG 2/20/20 risk levels (S
               malignant versus normal PCs within PB; two-sided Wilcoxon signed-rank P.
               Panels B and C use CoMMpass patient-level data (controlled access): no source data are written for them.
               Runs in the analysis environment (requirements.txt); the PDF is made from the SVG with Inkscape on a
-              machine with Arial (inkscape SuppFig9.svg --export-type=pdf).
+              machine with Arial (inkscape SuppFig5.svg --export-type=pdf).
 
 Inputs:       results/figure_inputs: longitudinal_cells.npz, longitudinal_signatures.npz,
               per-sample-mean-expr-score.csv.gz; results/commpass: circulatory_signature_patients.tsv,
               circulatory_signature_pairs.tsv, circulatory_signature_tests.tsv, circulatory_paired_samples.tsv.
 
-Outputs:      figures/SuppFig9.svg; figures/source_data/SuppFig9_A_tests.tsv, SuppFig9_D.tsv.
+Outputs:      figures/SuppFig5.svg; figures/source_data/SuppFig5_A_tests.tsv, SuppFig5_D.tsv.
 
 Dependencies: Python 3.8 with requirements.txt (matplotlib 3.5); figlib; Inkscape for the PDF.
 """
@@ -47,7 +47,7 @@ from figstyle import style, rich_text, p_runs, rho_runs, join_runs, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 from plots import at_mm
 
-LAYOUT = FigureLayout("SuppFig9", [
+LAYOUT = FigureLayout("SuppFig5", [
     Slot("longitudinal", "A", 0, 0, 112, 98),
     Slot("commpass_blood", "B", 115, 0, 68, 64),
     Slot("commpass_pairs", "C", 115, 66, 68, 50),
@@ -70,7 +70,7 @@ BRACKET_TISSUE = "#1A1A1A"
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig9_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/SuppFig5_%s.tsv" % key, sep="\t", index=False)
 
 
 def close(a, b, rel=1e-6):
@@ -310,7 +310,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT, preview_dpi=0)
         os.remove(pdf)                                   # the PDF is made from the SVG where Arial is installed
-        print(report("SuppFig9", issues, "file checks run once the PDF is made from the SVG"))
+        print(report("SuppFig5", issues, "file checks run once the PDF is made from the SVG"))
         print("\n".join(issues) or "ALL CHECKS PASS")
 
 

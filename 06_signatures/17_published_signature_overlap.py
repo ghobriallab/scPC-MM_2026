@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gene overlap between the 16 signatures and 42 published myeloma and plasma cell signatures (Supplementary Fig. 7B;
+"""Gene overlap between the 16 signatures and 42 published myeloma and plasma cell signatures (Extended Data Fig. 5B;
 Results; Methods, comparison with published signatures).
 
 Purpose:      For each of the 672 pairs of one consensus signature and one published signature (42 signatures from ten

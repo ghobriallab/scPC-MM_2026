@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 15: multivariable survival models of the MST score in CoMMpass, and regressions between
+"""Extended Data Figure 9: multivariable survival models of the MST score in CoMMpass, and regressions between
 mutation-based and transcription-based progression scores.
 
 Purpose:      A, B, Cox models of progression-free and overall survival (MST score adjusted for age, sex, R2-ISS and
@@ -14,7 +14,7 @@ Inputs:       results/commpass: mst_cox_coefficients.tsv, mst_cox_covariates.tsv
               results/figure_inputs: wgs_samples.tsv, wgs_residual_features_lm.tsv, wgs_residual_features_lasso.tsv,
               wgs_residual_stage.tsv.
 
-Outputs:      figures/SuppFig15.svg, SuppFig15.pdf; figures/source_data/SuppFig15_*.tsv.
+Outputs:      figures/EDFig9.svg, EDFig9.pdf; figures/source_data/EDFig9_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -38,7 +38,7 @@ from figstyle import style, rich_text, p_runs, rho_runs, join_runs, n_runs, rng,
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 from plots import at_mm
 
-LAYOUT = FigureLayout("SuppFig15", [
+LAYOUT = FigureLayout("EDFig9", [
     Slot("cox_pfs", "A", 0, 0, 90, 52),
     Slot("cox_os", "B", 93, 0, 90, 52),
     Slot("wgs_regression", "C", 0, 54, 183, 47),
@@ -57,7 +57,7 @@ SHADE = [0, 2, 3, 8, 9]                                   # alternate variables 
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig15_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig9_%s.tsv" % key, sep="\t", index=False)
 
 
 # ---- A, B ------------------------------------------------------------------------------------------------------------
@@ -230,7 +230,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig15", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig9", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
     source("CD_samples", w[["patient_id", "disease_status", "wgs_mm_like_score", "mst", "lm_fitted", "lm_resid", "lasso_pred",
                             "lasso_resid"]])

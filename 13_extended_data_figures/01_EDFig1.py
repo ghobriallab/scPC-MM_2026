@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 1: cohort structure and overview of malignant PCs across the cohort.
+"""Extended Data Figure 1: cohort structure and overview of malignant PCs across the cohort.
 
 Purpose:      A, cohort, sampling and analysis flow diagram (every row adds up, asserted). B, percentage of malignant PCs
               per individual and stage in BM and in PB: two-sided Wilcoxon rank-sum tests, Benjamini-Hochberg within
@@ -11,7 +11,7 @@ Inputs:       results/cohort: cohort_by_stage.tsv, sampling_design.tsv, analysis
               stage_comparisons.tsv; data/h5/agg/plasma-cell-GEX5-annotation-250207.pkl (via figlib/stage_tests.py);
               results/figure_inputs: clones_<stage>.npz, clones_rows.tsv, clones_bands.tsv.
 
-Outputs:      figures/SuppFig1.svg, SuppFig1.pdf; figures/source_data/SuppFig1_*.tsv.
+Outputs:      figures/EDFig1.svg, EDFig1.pdf; figures/source_data/EDFig1_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths). Also icons.py.
 """
@@ -37,10 +37,10 @@ from checks import figure_checks, file_checks, report
 from figstyle import style, rich_text, rich_width_pt, p_runs, SMALL, BASE, TITLE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 
-LAYOUT = FigureLayout("SuppFig1", [
+LAYOUT = FigureLayout("EDFig1", [
     Slot("flow", "A", 0, 0, 183, 70),
-    Slot("tumor_frac", "B", 0, 72, 183, 47),
-    Slot("clone_cnv", "C", 0, 121, 183, 125),
+    Slot("tumor_frac", "B", 0, 72, 183, 40),
+    Slot("clone_cnv", "C", 0, 114, 183, 86),
 ], max_height=247)
 PT_MM = 25.4 / 72.0
 STAGES5 = ["MGUS", "LRSMM", "IRSMM", "HRSMM", "MM"]
@@ -50,7 +50,7 @@ CNV = {-1: "#2166AC", 0: "#F2F2F2", 1: "#B2182B"}             # loss, neutral, g
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig1_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig1_%s.tsv" % key, sep="\t", index=False)
 
 
 def at_mm(sf, x, y, runs, gid, size=BASE, ha="left", va="center"):
@@ -162,7 +162,7 @@ def panel_tumor_frac(sf):
     rows = []
     for k, tissue in enumerate(("BM", "PB")):
         f, q = tf[tissue]
-        ax = axes_mm(sf, 14.0 + k * 92.0, 6.0, 72.0, 33.0)
+        ax = axes_mm(sf, 14.0 + k * 92.0, 6.0, 72.0, 26.0)
         d = f.assign(group=f["stage"])
         ax.set_ylim(-4, 104)
         tops = plots.box_strip(ax, d, STAGES5, P.TUMOR, "sf1b-" + tissue, point=1.6, label_size=SMALL, width=0.6,
@@ -197,7 +197,7 @@ def panel_clone_cnv(sf):
     x0, x1 = 22.0, 152.0
     tw = 2.2
     y = 3.0
-    rh = 0.295                                                  # mm per clone
+    rh = 0.19                                                  # mm per clone
     cmap = ListedColormap([CNV[-1], CNV[0], CNV[1]])
     for s in stages:
         z = np.load(paths.cache("clones_%s.npz" % s))
@@ -273,7 +273,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig1", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig1", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

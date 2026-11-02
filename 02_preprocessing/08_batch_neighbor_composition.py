@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Origin of the 30 nearest neighbors of each PC in the graph of the Fig. 1C UMAP, same-day and tissue mixing
 tests, and per-patient UMAPs of same-visit BM and PB samples (Results; Methods, scRNA-seq data normalization and
-clustering; Supplementary Fig. 3).
+clustering; Extended Data Fig. 3).
 
 Purpose:      Asks whether the structure of the Fig. 1C UMAP follows batches, using the graph of that UMAP
               (each cell and its 30 nearest neighbors in PCA space). Samples collected on the same day are treated

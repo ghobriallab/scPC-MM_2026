@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """kNN-smoothed features of the cells of the public single-cell datasets, the inputs of their malignancy and MST scores
-(Fig. 5C; Supplementary Figs. 13C, 14E; Methods, calculation of malignancy and MST scores on external single-cell data).
+(Fig. 5C; Extended Data Figs. 7C and 8E; Methods, calculation of malignancy and MST scores on external single-cell data).
 
 Purpose:      Smooths each cell's features over its k nearest neighbors (k = 30, as for the cohort; option --k): PCA of
               the dataset's log-normalized counts (highly variable genes with min_mean 0.0125, max_mean 3, min_disp 0.4,

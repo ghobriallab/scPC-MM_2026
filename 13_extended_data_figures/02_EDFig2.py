@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 2: malignant PCs without detectable CNV.
+"""Extended Data Figure 2: malignant PCs without detectable CNV.
 
 Purpose:      A, percentage of the 182 tumors without any CNV called by Numbat, by cytogenetic group; Fisher's exact
               test, CCND1 versus other translocations. B, percentage of malignant PCs without a CNV call in each of the
@@ -10,7 +10,7 @@ Purpose:      A, percentage of the 182 tumors without any CNV called by Numbat, 
 Inputs:       results/genomics: cnv_negative_tumors.tsv, cnv_negative_cells_per_tumor.tsv, cnv_negative_tests.tsv,
               cnv_status_umap.csv.gz.
 
-Outputs:      figures/SuppFig2.svg, SuppFig2.pdf; figures/source_data/SuppFig2_*.tsv.
+Outputs:      figures/EDFig2.svg, EDFig2.pdf; figures/source_data/EDFig2_*.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -29,7 +29,7 @@ from checks import figure_checks, file_checks, report
 from figstyle import style, rich_text, rich_width_pt, p_runs, join_runs, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 
-LAYOUT = FigureLayout("SuppFig2", [
+LAYOUT = FigureLayout("EDFig2", [
     Slot("tumors_without_cnv", "A", 0, 0, 44, 66),
     Slot("cells_without_cnv", "B", 46, 0, 50, 66),
     Slot("umap_cnv_status", "C", 98, 0, 85, 66),
@@ -49,7 +49,7 @@ UMAP = [("Normal PC", "Normal PCs", "#EBEBEB", 0.02), ("Malignant, not analyzed"
 
 
 def source(key, df):
-    df.to_csv(paths.SOURCE_DATA + "/SuppFig2_%s.tsv" % key, sep="\t", index=False)
+    df.to_csv(paths.SOURCE_DATA + "/EDFig2_%s.tsv" % key, sep="\t", index=False)
 
 
 def pval(tests, test, text):
@@ -137,7 +137,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig2", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("EDFig2", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

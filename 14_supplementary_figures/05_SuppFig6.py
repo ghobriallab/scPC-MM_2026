@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 10: progression-free survival of CoMMpass patients by thirds of four signatures.
+"""Supplementary Figure 6: progression-free survival of CoMMpass patients by thirds of four signatures.
 
 Purpose:      The survival panel of Fig. 3D,E (cut-offs at the 33rd and 66th percentiles, log-rank P) for B cell
               activation, cell cycling G1/S, histone/chaperone and cell cycling G2/M.
 
 Inputs:       data/commpass/MMRF_CoMMpass_IA22_BM_1_expr_sig_score.tsv; panel function of 12_main_figures/03_Fig3.py.
 
-Outputs:      figures/SuppFig10.svg, SuppFig10.pdf (no source data: CoMMpass patient-level data).
+Outputs:      figures/SuppFig6.svg, SuppFig6.pdf (no source data: CoMMpass patient-level data).
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -24,7 +24,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 fig3 = importlib.import_module("03_Fig3")        # survival panel of Fig. 3D,E
 
 SIGS = ["B_cell_activation", "cell_cycling_G1S", "histone_chaperone_gene", "cell_cycling_G2M"]
-LAYOUT = FigureLayout("SuppFig10", [Slot("km_" + s, "", k * 46.0, 0, 45, 47) for k, s in enumerate(SIGS)], max_height=247)
+LAYOUT = FigureLayout("SuppFig6", [Slot("km_" + s, "", k * 46.0, 0, 45, 47) for k, s in enumerate(SIGS)], max_height=247)
 
 
 def main():
@@ -35,7 +35,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig10", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("SuppFig6", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

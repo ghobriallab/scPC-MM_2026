@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """SHAP values of the malignancy random forest for one cross-validation fold (feature ranking used by the feature
-ablation, Supplementary Fig. 12E).
+ablation, Extended Data Fig. 6E).
 
 Purpose:      Fits the malignant vs normal forest with the tuned parameters (100 trees, max_features sqrt, max_depth 30,
               min_samples_split 20, min_samples_leaf 30, bootstrap, balanced_subsample class weights) on the training cells

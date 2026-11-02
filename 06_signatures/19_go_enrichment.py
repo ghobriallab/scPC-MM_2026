@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gene Ontology and Reactome terms enriched among the genes of each of the 16 signatures (Supplementary Fig. 7A).
+"""Gene Ontology and Reactome terms enriched among the genes of each of the 16 signatures (Extended Data Fig. 5A).
 
 Purpose:      Enrichment computed offline from the annotation files of g:Profiler version e112_eg59_p19, the version
               named in the Methods. For each signature and data source (GO:BP, GO:MF, GO:CC, Reactome): one-sided
@@ -44,7 +44,7 @@ def log(*a):
     LOG.write(s + "\n")
 
 
-# three representative terms per signature (the terms shown in Supplementary Fig. 7A)
+# three representative terms per signature (the terms shown in Extended Data Fig. 5A)
 ENRICHED = OrderedDict([
     ("cell_cycling_G2M", ["cell cycle process", "mitotic spindle organization", "cell cycle G2/M phase transition"]),
     ("cell_cycling_G1S", ["cell cycle process", "DNA replication", "positive regulation of cell cycle G1/S phase transition"]),

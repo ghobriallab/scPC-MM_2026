@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure 6: genes stably up- or downregulated in malignant PCs across disease stages.
+"""Supplementary Figure 2: genes stably up- or downregulated in malignant PCs across disease stages.
 
 Purpose:      Heatmap: per BM tumor, the significant log2 fold change (malignant versus normal PCs; figlib/targets.py)
               of the six genes up and the six genes down in at least half of the tumors of every stage; columns as in
@@ -9,7 +9,7 @@ Purpose:      Heatmap: per BM tumor, the significant log2 fold change (malignant
 Inputs:       data/paper (degs/scrna per-tumor tables); results/figure_inputs/tumors_cells.npz; drawing helpers of
               12_main_figures/02_Fig2.py.
 
-Outputs:      figures/SuppFig6.svg, SuppFig6.pdf; figures/source_data/SuppFig6_heatmap.tsv.
+Outputs:      figures/SuppFig2.svg, SuppFig2.pdf; figures/source_data/SuppFig2_heatmap.tsv.
 
 Dependencies: Python 3.13 with requirements_figures.txt; figlib (figstyle, palettes, layout, plots, checks, paths).
 """
@@ -36,7 +36,7 @@ from checks import figure_checks, file_checks, report
 from figstyle import style, rich_text, rich_width_pt, SMALL, BASE
 from layout import FigureLayout, Slot, new_figure, axes_mm, save
 
-LAYOUT = FigureLayout("SuppFig6", [Slot("stable_genes", "", 0, 0, 183, 128)], max_height=247)
+LAYOUT = FigureLayout("SuppFig2", [Slot("stable_genes", "", 0, 0, 183, 128)], max_height=247)
 PT_MM = 25.4 / 72.0
 UP = ["IGF1", "MLLT3", "QPCT", "TJP1", "CDKN1A", "BMI1"]
 DOWN = ["CD27", "HLA-DPA1", "CD81", "CD79A", "TMSB4X", "CD99"]
@@ -90,7 +90,7 @@ def heatmap(sf):
     out = Y.T.copy()
     out.insert(0, "stage", meta["stage"].values)
     out.insert(0, "tumor", meta["tumor"].values)
-    out.reset_index(drop=True).to_csv(paths.SOURCE_DATA + "/SuppFig6_heatmap.tsv", sep="\t", index=False)
+    out.reset_index(drop=True).to_csv(paths.SOURCE_DATA + "/SuppFig2_heatmap.tsv", sep="\t", index=False)
     return rows
 
 
@@ -123,7 +123,7 @@ def main():
         issues = figure_checks(fig, LAYOUT)
         svg, pdf = save(fig, LAYOUT)
         fi, ntext = file_checks(svg, pdf, LAYOUT)
-        print(report("SuppFig6", issues + fi, "SVG text elements: %d" % ntext))
+        print(report("SuppFig2", issues + fi, "SVG text elements: %d" % ntext))
         print("\n".join(issues + fi) or "ALL CHECKS PASS")
 
 

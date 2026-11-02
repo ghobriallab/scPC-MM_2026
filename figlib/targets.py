@@ -1,5 +1,5 @@
 """The sixteen therapeutic targets and the per-tumor differential expression shared by Fig. 2 and
-Supplementary Fig. 6.
+Supplementary Fig. 2.
 
 Purpose:      Per-tumor tables are genes x BM tumors named <patient>_BM_<stage>_tumor_<k> (two-sided Wilcoxon tests of
               malignant versus normal PCs of the same sample). Immunoglobulin genes and the minor tumors (tumor_1) are

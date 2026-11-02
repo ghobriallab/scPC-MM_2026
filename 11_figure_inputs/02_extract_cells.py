@@ -5,19 +5,19 @@ Purpose:      Every output keeps the cell order of its embedding and only what t
               categories the cells are colored by (Pt-### / HD-## labels, disease stage, tissue, PC status, cytogenetic
               call), per-cell scores and the expression of the genes shown. Cell barcodes and library, sample and record
               IDs are never written. Parts (run all, or name some: python3 02_extract_cells.py pcs tumors):
-                pcs           all PCs: UMAP, categories, malignancy and MST scores (Figs. 1C, 4D,E; Supplementary Figs. 2C,
+                pcs           all PCs: UMAP, categories, malignancy and MST scores (Figs. 1C, 4D,E; Extended Data Fig. 2C,
                               5, 8, 11A)
-                targets       log-normalized expression of the 16 therapeutic targets in all PCs (Supplementary Fig. 5A)
+                targets       log-normalized expression of the 16 therapeutic targets in all PCs (Supplementary Fig. 1A)
                 tumors        malignant PCs: UMAP, categories and scaled expression of the nine translocation partner genes
-                              (Fig. 2C-G; Supplementary Figs. 4C,D, 6)
+                              (Fig. 2C-G; Extended Data Fig. 4C,D and Supplementary Fig. 2)
                 tumors_cnv    1q and 13q Numbat calls, call probabilities and CNV-like scores of the malignant PCs, the
-                              scores quantile-transformed to a normal distribution (random_state 42) (Supplementary Fig. 11B)
-                longitudinal  PCs of the three SMM patients sampled at two risk levels (Supplementary Figs. 9A,
+                              scores quantile-transformed to a normal distribution (random_state 42) (Supplementary Fig. 7B)
+                longitudinal  PCs of the three SMM patients sampled at two risk levels (Supplementary Fig. 5A,
                               14C)
                 external      PCs of three external studies with the per-cell MST score of the final model (Supplementary
                               Fig. 14E); four samples of one study are excluded at the request of its authors
-                signatures    per-cell activity of the 16 signatures (Supplementary Figs. 8, 9A, 14C)
-                senescence    per-cell SenMayo senescence score (Supplementary Fig. 11A)
+                signatures    per-cell activity of the 16 signatures (Supplementary Figs. 3, 4 and 5A and Extended Data Fig. 8C)
+                senescence    per-cell SenMayo senescence score (Supplementary Fig. 7A)
               The large per-cell tables are loaded one at a time (about 50 GB of memory).
 
 Inputs:       data/paper: anndata/ (plasma-cell-GEX5-umap.h5ad, tumor-cell-GEX5-umap.h5ad, longitudinal-samples-umap.h5ad),
@@ -234,7 +234,7 @@ def by_paper_names(df, mapping):
 
 
 def part_tumors_cnv():
-    """Supplementary Fig. 11B: Numbat 1q/13q calls (no call = neutral; amp/bamp = amplification; del/bdel = deletion),
+    """Supplementary Fig. 7B: Numbat 1q/13q calls (no call = neutral; amp/bamp = amplification; del/bdel = deletion),
     call probability (no call = 0) and the CNV-like score quantile-transformed to a normal distribution over the
     malignant cells (QuantileTransformer, random_state 42, scikit-learn 1.0.2)."""
     from sklearn.preprocessing import QuantileTransformer
@@ -335,7 +335,7 @@ def part_signatures():
 
 
 def part_senescence():
-    """Per-cell SenMayo senescence score (mean log-normalized expression of the SenMayo genes) for Supplementary Fig. 11A,
+    """Per-cell SenMayo senescence score (mean log-normalized expression of the SenMayo genes) for Supplementary Fig. 7A,
     from the per-cell senescence table (internal cell names, mapped to the names of the paper objects). The log compares
     its per-sample means with the kNN-smoothed per-sample feature of the classifier."""
     with h5py.File(PCS, "r") as f:

@@ -34,7 +34,8 @@ plasma cells > 20%, serum M-protein > 2 g/dL, involved/uninvolved free light cha
 | `10_commpass` | CoMMpass expression, scores and survival models |
 | `11_figure_inputs` | De-identified, plot-ready inputs of the figures |
 | `12_main_figures` | Figures 1-6 |
-| `13_supplementary_figures` | Supplementary Figures 1-16 |
+| `13_extended_data_figures` | Extended Data Figures 1-10 |
+| `14_supplementary_figures` | Supplementary Figures 1-7 |
 
 Each folder has its own README with its scripts.
 
@@ -48,22 +49,22 @@ Each folder has its own README with its scripts.
 | Figure 4 | `12_main_figures/04_Fig4.py` |
 | Figure 5 | `12_main_figures/05_Fig5.py` |
 | Figure 6 | `12_main_figures/06_Fig6.py` |
-| Supplementary Figure 1 | `13_supplementary_figures/01_SuppFig1.py` |
-| Supplementary Figure 2 | `13_supplementary_figures/02_SuppFig2.py` |
-| Supplementary Figure 3 | `13_supplementary_figures/03_SuppFig3.py` |
-| Supplementary Figure 4 | `13_supplementary_figures/04_SuppFig4.py` |
-| Supplementary Figure 5 | `13_supplementary_figures/05_SuppFig5.py` |
-| Supplementary Figure 6 | `13_supplementary_figures/06_SuppFig6.py` |
-| Supplementary Figure 7 | `13_supplementary_figures/07_SuppFig7.py` |
-| Supplementary Figure 8 | `13_supplementary_figures/08_SuppFig8.py` |
-| Supplementary Figure 9 | `13_supplementary_figures/09_SuppFig9.py` |
-| Supplementary Figure 10 | `13_supplementary_figures/10_SuppFig10.py` |
-| Supplementary Figure 11 | `13_supplementary_figures/11_SuppFig11.py` |
-| Supplementary Figure 12 | `13_supplementary_figures/12_SuppFig12.py` |
-| Supplementary Figure 13 | `13_supplementary_figures/13_SuppFig13.py` |
-| Supplementary Figure 14 | `13_supplementary_figures/14_SuppFig14.py` |
-| Supplementary Figure 15 | `13_supplementary_figures/15_SuppFig15.py` |
-| Supplementary Figure 16 | `13_supplementary_figures/16_SuppFig16.py` |
+| Extended Data Figure 1 | `13_extended_data_figures/01_EDFig1.py` |
+| Extended Data Figure 2 | `13_extended_data_figures/02_EDFig2.py` |
+| Extended Data Figure 3 | `13_extended_data_figures/03_EDFig3.py` |
+| Extended Data Figure 4 | `13_extended_data_figures/04_EDFig4.py` |
+| Extended Data Figure 5 | `13_extended_data_figures/05_EDFig5.py` |
+| Extended Data Figure 6 | `13_extended_data_figures/06_EDFig6.py` |
+| Extended Data Figure 7 | `13_extended_data_figures/07_EDFig7.py` |
+| Extended Data Figure 8 | `13_extended_data_figures/08_EDFig8.py` |
+| Extended Data Figure 9 | `13_extended_data_figures/09_EDFig9.py` |
+| Extended Data Figure 10 | `13_extended_data_figures/10_EDFig10.py` |
+| Supplementary Figure 1 | `14_supplementary_figures/01_SuppFig1.py` |
+| Supplementary Figure 2 | `14_supplementary_figures/02_SuppFig2.py` |
+| Supplementary Figures 3 and 4 | `14_supplementary_figures/03_SuppFig3_4.py` |
+| Supplementary Figure 5 | `14_supplementary_figures/04_SuppFig5.py` |
+| Supplementary Figure 6 | `14_supplementary_figures/05_SuppFig6.py` |
+| Supplementary Figure 7 | `14_supplementary_figures/06_SuppFig7.py` |
 
 ## Data
 
@@ -79,14 +80,14 @@ Authorized Access website.
 
 | Source | Reference | Used in |
 |--------|-----------|---------|
-| [GSE117156](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE117156) | Ledergor et al., *Nat Med* 2018 | Fig. 5C; Supplementary Figs. 13C, 14E |
-| [GSE193531](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE193531) | Boiarsky et al., *Nat Commun* 2022 | Fig. 5C; Supplementary Figs. 13C, 14E |
-| [EGAS00001006694](https://ega-archive.org/studies/EGAS00001006694) | Dang et al., *Cancer Cell* 2023 | Fig. 5C; Supplementary Figs. 13C, 14E |
-| [GSE161801](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161801) | Tirier et al., *Nat Commun* 2021 | Supplementary Fig. 7C |
+| [GSE117156](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE117156) | Ledergor et al., *Nat Med* 2018 | Fig. 5C; Extended Data Figs. 7C and 8E |
+| [GSE193531](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE193531) | Boiarsky et al., *Nat Commun* 2022 | Fig. 5C; Extended Data Figs. 7C and 8E |
+| [EGAS00001006694](https://ega-archive.org/studies/EGAS00001006694) | Dang et al., *Cancer Cell* 2023 | Fig. 5C; Extended Data Figs. 7C and 8E |
+| [GSE161801](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161801) | Tirier et al., *Nat Commun* 2021 | Extended Data Fig. 5C |
 | [GSE124310](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE124310) | Zavidij et al., *Nat Cancer* 2020 | Signature activity in bone marrow cell types (Methods) |
-| CoMMpass IA22 and IA24 ([MMRF Research Gateway](https://research.themmrf.org/)) | Skerget et al., *Nat Genet* 2024 | Figs. 3D-F, 5D; Supplementary Figs. 9B,C, 10, 15A,B |
-| [g:Profiler](https://biit.cs.ut.ee/gprofiler/) e112 archive (GO and Reactome GMT files) | Kolberg et al., *Nucleic Acids Res* 2023 | Supplementary Fig. 7A |
-| 10x Genomics reference GRCh38-2020-A | 10x Genomics | Gene IDs for Supplementary Fig. 7A |
+| CoMMpass IA22 and IA24 ([MMRF Research Gateway](https://research.themmrf.org/)) | Skerget et al., *Nat Genet* 2024 | Figs. 3D-F, 5D; Supplementary Figs. 5B,C and 6 and Extended Data Fig. 9A,B |
+| [g:Profiler](https://biit.cs.ut.ee/gprofiler/) e112 archive (GO and Reactome GMT files) | Kolberg et al., *Nucleic Acids Res* 2023 | Extended Data Fig. 5A |
+| 10x Genomics reference GRCh38-2020-A | 10x Genomics | Gene IDs for Extended Data Fig. 5A |
 
 ### Local layout
 
@@ -148,7 +149,7 @@ its name as an argument, and their header gives the loop over the cohort.
 ```bash
 python3 01_cohort/01_cohort_structure.py
 (cd 05_differential_expression && Rscript 03_deseq2_stage_comparisons.R)
-for f in 12_main_figures/*.py 13_supplementary_figures/*.py; do PYTHONHASHSEED=0 SOURCE_DATE_EPOCH=0 python3 "$f"; done
+for f in 12_main_figures/*.py 13_extended_data_figures/*.py 14_supplementary_figures/*.py; do PYTHONHASHSEED=0 SOURCE_DATE_EPOCH=0 python3 "$f"; done
 ```
 
 `11_figure_inputs/02_extract_cells.py` loads per-cell tables of 1.65 million cells and needs about 50 GB of memory.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Stage associations of the MST score and of the five progression-associated signatures with and without adjustment
-for genetic alterations, and malignancy and MST scores by cytogenetic group (Supplementary Figs. 14D and 16A; Results).
+for genetic alterations, and malignancy and MST scores by cytogenetic group (Extended Data Figs. 8D and 10A; Results).
 
 Purpose:      Units: the mean over the malignant BM PCs of one patient at one disease stage, for units with at least
               30 such cells (patients sampled at two stages contribute two units; SMM risk groups follow the IMWG
@@ -195,8 +195,8 @@ for col, lab in outcomes.items():
     add_test("Wald (cluster-robust)", "%s: stage as 4 indicators, adjusted for genetics" % lab, n_cat, round(st, 2), p)
     add_test("Wald (cluster-robust)", "%s: MM vs MGUS, adjusted (%.2f SD)" % (lab, cat.params["MM"]), n_cat, round(cat.tvalues["MM"], 2), cat.pvalues["MM"])
 
-# ---- 4. scores by primary cytogenetic group (Supplementary Fig. 14D; Results) -------------------
-# unadjusted (nine groups as in Supplementary Fig. 14D), then the 5 translocation/HRD terms adjusted for stage
+# ---- 4. scores by primary cytogenetic group (Extended Data Fig. 8D; Results) -------------------
+# unadjusted (nine groups as in Extended Data Fig. 8D), then the 5 translocation/HRD terms adjusted for stage
 for col in ["MST Score", "Malignancy Score"]:
     d = units.dropna(subset=[col])
     st, p = kruskal(*[g[col].values for _, g in d.groupby("cytogenetics")])

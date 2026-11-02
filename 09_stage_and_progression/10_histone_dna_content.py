@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Histone/chaperone signature activity and tumor DNA content (Supplementary Fig. 16B-D; Results).
+"""Histone/chaperone signature activity and tumor DNA content (Extended Data Fig. 10B-D; Results).
 
 Purpose:      Tests whether the stage association of the histone/chaperone signature reflects the amount of DNA in the
               tumor cells. Units: the BM tumors of 02_stage_effects_genetics.py (malignant BM PCs of one patient at one

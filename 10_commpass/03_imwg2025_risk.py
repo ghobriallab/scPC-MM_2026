@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""IMS/IMWG 2025 high-risk classification of CoMMpass patients for the Cox models (Results; Supplementary Fig. 15A,B; Methods).
+"""IMS/IMWG 2025 high-risk classification of CoMMpass patients for the Cox models (Results; Extended Data Fig. 9A,B; Methods).
 
 Purpose:      High risk if any of (Avet-Loiseau et al., J Clin Oncol 2025;43(24):2739-2751): C1 del(17p) at >20% cancer
               clonal fraction and/or TP53 mutation; C2 t(4;14), t(14;16) or t(14;20) together with 1q+ and/or del(1p32);

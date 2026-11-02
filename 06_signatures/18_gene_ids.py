@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ensembl gene IDs of the gene symbols of the expression matrices, for the GO enrichment (Supplementary Fig. 7A).
+"""Ensembl gene IDs of the gene symbols of the expression matrices, for the GO enrichment (Extended Data Fig. 5A).
 
 Purpose:      The cohort's matrices carry gene symbols only; the GO and Reactome annotation files of g:Profiler are keyed
               by Ensembl gene ID. This reads the 10x Genomics reference the data were aligned to (GRCh38-2020-A) and

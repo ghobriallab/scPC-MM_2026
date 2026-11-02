@@ -1,6 +1,6 @@
 # ============================================================================
 # Purpose:      Tests whether the MST score adds prognostic information to clinical and cytogenetic risk factors in
-#               newly diagnosed myeloma (CoMMpass, IA22 endpoints; Results, Supplementary Fig. 15A,B and Methods). Cox
+#               newly diagnosed myeloma (CoMMpass, IA22 endpoints; Results, Extended Data Fig. 9A,B and Methods). Cox
 #               models of progression-free and overall survival (years = days / 365) with the MST score (per SD over the
 #               754 patients) adjusted for age (per 10 years), sex, R2-ISS stage and IMS/IMWG 2025 high-risk status, in
 #               the patients with complete data, against the same model without the score: likelihood-ratio test for

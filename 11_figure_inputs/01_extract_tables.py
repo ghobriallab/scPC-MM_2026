@@ -5,20 +5,20 @@ Purpose:      Each part repeats the data steps behind one group of panels and wr
               identifiers are the de-identified Pt-### / HD-## labels (sample, record and library IDs are never written).
               SMM risk groups of the tables written here follow the IMWG 2/20/20 model (risk.py).
               Parts (run all, or name some: python3 01_extract_tables.py wgs shap):
-                tables     per-patient score and signature tables as CSV (Figs. 4, 5; Supplementary Figs. 8, 9, 11, 14)
+                tables     per-patient score and signature tables as CSV (Figs. 4, 5; Supplementary Figs. 3–5 and 7 and Extended Data Fig. 8)
                 wgs        MST score against the WGS MM-like score (least squares), LASSO of the MST score on the WGS
                            alterations (LassoCV, 5 folds, random_state 42) and the classifier features correlated with the
-                           residuals (Spearman, Benjamini-Hochberg) (Fig. 5E-G; Supplementary Fig. 15C,D)
+                           residuals (Spearman, Benjamini-Hochberg) (Fig. 5E-G; Extended Data Fig. 9C,D)
                 confusion  test-set confusion counts of the two random forest classifiers (Fig. 4B,C)
                 shap       SHAP values and feature values of the training and test cells (Fig. 4B,C)
                 hotspot    Hotspot local-correlation Z-scores and the signature genes (Fig. 3A,B)
-                tuning     cross-validation accuracy of the feature sets, smoothing strategies and k (Supplementary Fig. 12A-C)
-                colors     patient colors (Fig. 1C; Supplementary Fig. 1C)
+                tuning     cross-validation accuracy of the feature sets, smoothing strategies and k (Extended Data Fig. 6A-C)
+                colors     patient colors (Fig. 1C; Extended Data Fig. 1C)
                 cohort     tracks, isotypes and PC counts of the 226 individuals (Fig. 1B); progression track from
                            risk.progression_reached(); 2/20/20 criterion values per individual and disease stage
                 clones     CNVs of the Numbat clones of BM tumors by disease stage, Ward order within stage; a patient's
                            clone sets of two samples that share tissue and IMWG risk group are kept once
-                           (Supplementary Fig. 1C)
+                           (Extended Data Fig. 1C)
 
 Inputs:       data/paper: cohort-clinical-metadata.csv, wgs-mm-like-score-final.csv, wgs-mutations-final.csv,
               anndata/plasma-cell-GEX5-umap.h5ad (obs), classifier/ (patient_id_mean_probability.pkl,
@@ -110,7 +110,7 @@ def part_tables():
         log("wrote %s: %d rows" % (name, len(df)))
 
 
-# ---- Fig. 5E-G, Supplementary Fig. 15C,D -----------------------------------------------------------------------------
+# ---- Fig. 5E-G, Extended Data Fig. 9C,D -----------------------------------------------------------------------------
 def part_wgs():
     import statsmodels.api as sm
     from scipy.stats import spearmanr
@@ -296,7 +296,7 @@ def part_hotspot():
     log("wrote hotspot_z.npz, hotspot_genes.tsv")
 
 
-# ---- Supplementary Fig. 12A-C ------------------------------------------------------------------------------------------
+# ---- Extended Data Fig. 6A-C ------------------------------------------------------------------------------------------
 def part_tuning():
     for name, parts in [("tumor_normal", ("classifier", "performance", "init_model", "parts", "tumor-normal-classifier.csv")),
                         ("mgus_mm", ("classifier", "performance", "init_model", "full", "cross-combined-mgus-mm-classifier.csv")),
@@ -363,7 +363,7 @@ def part_cohort():
     save(counts, "cohort_counts.tsv", "patient_id")
 
 
-# ---- Supplementary Fig. 1C ---------------------------------------------------------------------------------------------
+# ---- Extended Data Fig. 1C ---------------------------------------------------------------------------------------------
 def part_clones():
     import seaborn as sns
     clones = pd.read_pickle(data("paper", "cnvs", "clone-phylogeny-data.pkl"))

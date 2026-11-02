@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Raw counts of the PCs of the individuals sampled at two disease stages, the input of the longitudinal UMAP (Supplementary Figs. 9A, 14C).
+"""Raw counts of the PCs of the individuals sampled at two disease stages, the input of the longitudinal UMAP (Supplementary Fig. 5A and Extended Data Fig. 8C).
 
 Purpose:      Libraries of 5' assays (assay_type GEX5) with a disease stage (Other excluded); SMM risk group from
               SMM_stage_lenient; HD renamed Donor. The individuals kept are those whose BM samples carry more than one
