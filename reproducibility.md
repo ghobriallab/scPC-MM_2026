@@ -14,6 +14,25 @@
 **Top issues:**
 - [Step Ordering] 15/170 scripts lack a numeric prefix (e.g. 01_, 02_): config.py, risk.py, environment.R (+12 more)
 
+_Run at 2026-11-02T19:04:56Z by [run-reproducibility-check](https://github.com/Noeperron/scPC-MM_2026/actions/runs/41506565173)_
+
+---
+
+
+## 2026-11-02: Score 100/100 (Good)
+
+| Category | Score |
+|----------|-------|
+| Step Ordering | 20/20 |
+| Documentation | 25/25 |
+| Path Hygiene | 20/20 |
+| Data Handling | 15/15 |
+| Naming Conventions | 10/10 |
+| Phi   Credential Safety | 10/10 |
+
+**Top issues:**
+- [Step Ordering] 15/170 scripts lack a numeric prefix (e.g. 01_, 02_): config.py, risk.py, environment.R (+12 more)
+
 _Run at 2026-11-02T18:19:26Z by [run-reproducibility-check](https://github.com/Noeperron/scPC-MM_2026/actions/runs/41499447633)_
 
 ---
