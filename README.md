@@ -1,7 +1,7 @@
 # scPC-MM: single-cell transcription of plasma cells from myeloma precursors to myeloma
 
-Code to reproduce the analyses and every figure panel in **"A Myeloma Single-Cell Transcription (MST) Score Tracks
-Disease Stage in Multiple Myeloma and Its Precursors"**.
+Code to reproduce the analyses and every figure panel in **"A single-cell transcription score tracks disease stage in
+multiple myeloma and its precursors"**.
 
 The study profiles 1,649,290 plasma cells (PCs) from the bone marrow (BM) and peripheral blood (PB) of 226 individuals
 (41 with multiple myeloma (MM), 120 with smoldering MM (SMM), 36 with monoclonal gammopathy of undetermined significance
